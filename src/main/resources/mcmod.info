@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "ore",
+      "name": "O.R.E",
+      "description": "Advanced World-Gen Mod",
+      "version": "${version}",
+      "mcversion": "${mcversion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": ["EwyBoy", "Topisani", "Jared", "Lanse"],
+      "credits": "",
+      "logoFile": "",
+      "screenshots": [],
+      "dependencies": []
+    }
+]
