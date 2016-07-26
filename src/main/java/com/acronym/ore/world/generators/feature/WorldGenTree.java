@@ -10,6 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import java.util.Random;
 
 public class WorldGenTree extends WorldGenAbstractTree {
+
     /**
      * The minimum height of a generated tree.
      */

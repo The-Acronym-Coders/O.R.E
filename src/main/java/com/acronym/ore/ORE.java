@@ -21,7 +21,7 @@ import static com.acronym.ore.reference.Reference.*;
 public class ORE {
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e) {
+    public void preInit(FMLPreInitializationEvent event) {
 //        MinecraftForge.ORE_GEN_BUS.register(this);
 //        MinecraftForge.TERRAIN_GEN_BUS.register(this);
 //        MinecraftForge.EVENT_BUS.register(this);
@@ -29,17 +29,15 @@ public class ORE {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent e) {
-
+    public void init(FMLInitializationEvent event) {
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent e) {
+    public void postInit(FMLPostInitializationEvent event) {
     }
 
     @Mod.EventHandler
-    public void loadcomplete(FMLServerStartedEvent e) {
-
+    public void loadcomplete(FMLServerStartedEvent event) {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

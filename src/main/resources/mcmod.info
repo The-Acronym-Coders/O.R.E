@@ -7,7 +7,12 @@
       "mcversion": "${mcversion}",
       "url": "",
       "updateUrl": "",
-      "authorList": ["EwyBoy", "Topisani", "Jared", "Lanse"],
+      "authorList": [
+          "EwyBoy",
+          "Topisani",
+          "Jared",
+          "Lanse"
+          ],
       "credits": "",
       "logoFile": "",
       "screenshots": [],
