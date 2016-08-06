@@ -75,9 +75,9 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
 
                                     IBlockState state = worldIn.getBlockState(blockpos);
-//                                    if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
+                                    if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
                                         worldIn.setBlockState(blockpos, this.oreBlock, 2);
-//                                    }
+                                    }
                                 }
                             }
                         }

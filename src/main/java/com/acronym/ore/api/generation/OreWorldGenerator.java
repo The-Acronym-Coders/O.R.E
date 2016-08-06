@@ -8,11 +8,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
  */
 public abstract class OreWorldGenerator extends WorldGenerator {
     private Block block;
-    private int blockCount;
+    private int size;
 
-    public OreWorldGenerator(Block block, int blockCount) {
+    public OreWorldGenerator(Block block, int size) {
         this.block = block;
-        this.blockCount = blockCount;
+        this.size = size;
     }
 
     public OreWorldGenerator() {
@@ -22,7 +22,7 @@ public abstract class OreWorldGenerator extends WorldGenerator {
         return block;
     }
 
-    public int getBlockCount() {
-        return blockCount;
+    public int getSize() {
+        return size;
     }
 }
