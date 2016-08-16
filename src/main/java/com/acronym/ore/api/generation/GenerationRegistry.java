@@ -10,14 +10,21 @@ import java.util.List;
  * Created by Jared on 8/4/2016.
  */
 public class GenerationRegistry {
-    private static List<Generation> generations = new ArrayList<Generation>();
+    private static BiMap<Integer, List<Generation>> generations = HashBiMap.create();
     private static BiMap<String, Class<? extends OreWorldGenerator>> worldGeneratorMap = HashBiMap.create();
 
     public static void addGeneratin(Generation gen) {
-        generations.add(gen);
+        for (int i : gen.getDimensions()) {
+            List<Generation> gens = generations.get(i);
+            if(gens ==null){
+                gens = new ArrayList<Generation>();
+            }
+            gens.add(gen);
+            generations.put(i, gens);
+        }
     }
 
-    public static List<Generation> getGenerations() {
+    public static BiMap<Integer, List<Generation>> getGenerations() {
         return generations;
     }
 

@@ -11,6 +11,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -20,24 +21,29 @@ public class OREWG implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        for (Generation gene : GenerationRegistry.getGenerations()) {
-            if (random.nextInt(10) == 0) {
-                try {
-                    gen(world, random, new BlockPos(chunkX * 16, 0, chunkZ * 16), gene.getBlockCount(), gene.getWorldGenerator().getConstructor(Block.class, int.class).newInstance(gene.getBlock(), gene.getSize()), gene.getMinHeight(), gene.getMaxHeight());
-//                    gene.getWorldGenerator().getConstructor(Block.class, int.class).newInstance(gene.getBlock(), gene.getBlockCount()).generate(world, random, world.getHeight(new BlockPos(chunkX * 16, 0, chunkZ * 16)).up(50));
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
+        if (GenerationRegistry.getGenerations().containsKey(world.provider.getDimension())) {
+            List<Generation> generations = GenerationRegistry.getGenerations().get(world.provider.getDimension());
+            for (Generation gen : generations) {
+                int chance = random.nextInt(99);
+                if (chance != 0)
+                    if (chance + 1 < gen.getChunkChance()) {
+                        BlockPos bp = new BlockPos(chunkX + 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
+                        if (world.getBiomeGenForCoords(bp).getBiomeName().contains(gen.getBiome()))
+                            try {
+                                gen(world, random, bp, gen.getBlockCount(), gen.getWorldGenerator().getConstructor(Block.class, int.class).newInstance(gen.getBlock(), gen.getSize()), gen.getMinHeight(), gen.getMaxHeight());
+                            } catch (InstantiationException e) {
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
+                            } catch (NoSuchMethodException e) {
+                                e.printStackTrace();
+                            }
+                    }
             }
-//            addOre(world, random, new BlockPos(chunkX * 16, 0, chunkZ * 16), ore);
-//            addTree(world, random, new BlockPos(chunkX * 16, 0, chunkZ * 16), gen);
         }
+
     }
 
     /**
@@ -57,7 +63,8 @@ public class OREWG implements IWorldGenerator {
         }
 
         for (int j = 0; j < blockCount; ++j) {
-            BlockPos blockpos = pos.add(random.nextInt(16), random.nextInt(maxHeight - minHeight) + minHeight, random.nextInt(16)).up(50);
+            //TODO remove up(50)
+            BlockPos blockpos = pos.add(0, random.nextInt(maxHeight - minHeight) + minHeight, 0).up(50);
             generator.generate(worldIn, random, blockpos);
         }
     }
