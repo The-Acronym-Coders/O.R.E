@@ -5,12 +5,14 @@ import net.minecraft.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Jared on 8/4/2016.
  */
 public class Generation {
     private String type = "";
+    private Map<String, Object> params;
     private Class<? extends OreWorldGenerator> worldGenerator = null;
     private String block = "";
     private int blockCount = 0;
@@ -20,10 +22,12 @@ public class Generation {
     private int[] dimensions = new int[0];
     private String[] replaceable = new String[0];
     private int chunkChance = 0;
-    private String biome;
+    private String biome = "__null";
 
-    public Generation(Class<? extends OreWorldGenerator> type, String block, int blockCount, int size, String[] replaceable, int minHeight, int maxHeight, int[] dimensions, int chunkChance, String biome) {
+
+    public Generation(Class<? extends OreWorldGenerator> type, Map<String, Object> params, String block, int blockCount, int size, String[] replaceable, int minHeight, int maxHeight, int[] dimensions, int chunkChance, String biome) {
         this.type = GenerationRegistry.getKeyFromGenerator(type);
+        this.params = params;
         this.block = block;
         this.worldGenerator = type;
         this.blockCount = blockCount;
@@ -36,8 +40,9 @@ public class Generation {
         this.biome = biome;
     }
 
-    public Generation(String type, String block, int blockCount, int size, String[] replaceable, int minHeight, int maxHeight, int[] dimensions, int chunkChance, String biome) {
+    public Generation(String type, Map<String, Object> params, String block, int blockCount, int size, String[] replaceable, int minHeight, int maxHeight, int[] dimensions, int chunkChance, String biome) {
         this.type = type;
+        this.params = params;
         this.block = block;
         this.worldGenerator = GenerationRegistry.getGeneratorFromKey(type);
         this.blockCount = blockCount;
@@ -123,7 +128,7 @@ public class Generation {
     }
 
     public Generation register() {
-        return new Generation(type, block, blockCount, size, replaceable, minHeight, maxHeight, dimensions, chunkChance, biome);
+        return new Generation(type, params, block, blockCount, size, replaceable, minHeight, maxHeight, dimensions, chunkChance, biome);
     }
 
     public List<Integer> getDimensions() {
@@ -150,6 +155,16 @@ public class Generation {
     public void setBiome(String biome) {
         this.biome = biome;
     }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
 }
+
+
 
 

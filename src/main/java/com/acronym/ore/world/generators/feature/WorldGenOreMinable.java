@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.Map;
 import java.util.Random;
 
 public class WorldGenOreMinable extends OreWorldGenerator {
@@ -21,19 +22,18 @@ public class WorldGenOreMinable extends OreWorldGenerator {
     private final Predicate<IBlockState> predicate;
 
 
-    public WorldGenOreMinable(Block block, int blockCount) {
-        this(block.getDefaultState(), blockCount);
+    public WorldGenOreMinable(IBlockState state, int blockCount, Map<String, Object> params) {
+        this(state, blockCount, BlockMatcher.forBlock(Blocks.STONE),params);
     }
 
-    public WorldGenOreMinable(IBlockState state, int blockCount) {
-        this(state, blockCount, BlockMatcher.forBlock(Blocks.STONE));
-    }
-
-    public WorldGenOreMinable(IBlockState state, int blockCount, Predicate<IBlockState> predicate) {
-        super(state.getBlock(), blockCount);
+    public WorldGenOreMinable(IBlockState state, int blockCount, Predicate<IBlockState> predicate, Map<String, Object> params) {
+        super(state.getBlock(), blockCount, params);
         this.oreBlock = state;
         this.numberOfBlocks = blockCount;
         this.predicate = predicate;
+    }
+    public WorldGenOreMinable(Block block, int size, Map<String, Object> params) {
+        this(block.getDefaultState(),size,params);
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {

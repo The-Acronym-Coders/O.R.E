@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -27,10 +28,10 @@ public class OREWG implements IWorldGenerator {
                 int chance = random.nextInt(99);
                 if (chance != 0)
                     if (chance + 1 < gen.getChunkChance()) {
-                        BlockPos bp = new BlockPos(chunkX + 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
-                        if (world.getBiomeGenForCoords(bp).getBiomeName().contains(gen.getBiome()))
+                        BlockPos bp = new BlockPos(chunkX * 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
+                        if (gen.getBiome() ==null || world.getBiomeGenForCoords(bp).getBiomeName().contains(gen.getBiome()))
                             try {
-                                gen(world, random, bp, gen.getBlockCount(), gen.getWorldGenerator().getConstructor(Block.class, int.class).newInstance(gen.getBlock(), gen.getSize()), gen.getMinHeight(), gen.getMaxHeight());
+                                gen(world, random, bp, gen.getBlockCount(), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), gen.getSize(), gen.getParams()), gen.getMinHeight(), gen.getMaxHeight());
                             } catch (InstantiationException e) {
                                 e.printStackTrace();
                             } catch (IllegalAccessException e) {
@@ -63,8 +64,7 @@ public class OREWG implements IWorldGenerator {
         }
 
         for (int j = 0; j < blockCount; ++j) {
-            //TODO remove up(50)
-            BlockPos blockpos = pos.add(0, random.nextInt(maxHeight - minHeight) + minHeight, 0).up(50);
+            BlockPos blockpos = pos.add(0, random.nextInt(maxHeight - minHeight) + minHeight, 0);
             generator.generate(worldIn, random, blockpos);
         }
     }

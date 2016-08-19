@@ -4,6 +4,7 @@ import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.config.Config;
 import com.acronym.ore.reference.Reference;
 import com.acronym.ore.world.generators.OREWG;
+import com.acronym.ore.world.generators.feature.WorldGenOreGeode;
 import com.acronym.ore.world.generators.feature.WorldGenOreMinable;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,8 +33,10 @@ public class ORE {
 //        MinecraftForge.TERRAIN_GEN_BUS.register(this);
 //        MinecraftForge.EVENT_BUS.register(this);
         GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);
+        GenerationRegistry.registerWorldGenerator("geode", WorldGenOreGeode.class);
+
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
-        Reference.CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), "/" + Reference.NAME + "/");
+        Reference.CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + Reference.NAME + File.separator);
         Config.load();
     }
 
