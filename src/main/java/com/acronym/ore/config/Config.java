@@ -39,7 +39,7 @@ public class Config {
 
     public static void addGenerator(Collection<? extends Generation> types) {
         for (Generation type : types) {
-            GenerationRegistry.addGeneratin(type.register());
+            GenerationRegistry.addGeneration(type.register());
         }
     }
 

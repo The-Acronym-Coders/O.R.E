@@ -1,0 +1,69 @@
+{
+  "ore": [
+    {
+      "name": "testGeode",
+      "type": "geode",
+      "block": "minecraft:diamond_block",
+      "blockCount": "4",
+      "size": "9",
+      "minHeight": "0",
+      "maxHeight": "128",
+      "replaceable": [
+        "minecraft:dirt",
+        "minecraft:stone",
+        "minecraft:air"
+      ],
+      "chunkChance": "100",
+      "params": {
+        "width": 26,
+        "height": 8,
+        "hollow": true
+      },
+      "biomeRestriction": "none",
+      "biomes": [],
+      "dimensionsRestriction": "none",
+      "dimensions": []
+    },
+    {
+      "name": "testOreGold",
+      "type": "ore",
+      "block": "minecraft:gold_block",
+      "blockCount": "if(typeof size =='undefined'){size = 2} Math.round(size+=1)",
+      "size": "9",
+      "minHeight": "0",
+      "maxHeight": "24*6",
+      "replaceable": [
+        "minecraft:dirt",
+        "minecraft:stone",
+        "minecraft:air"
+      ],
+      "chunkChance": "60+40",
+      "biomeRestriction": "none",
+      "biomes": [
+        "forest"
+      ],
+      "dimensionsRestriction": "whitelist",
+      "dimensions": [0]
+    },
+    {
+      "name": "testOreIron",
+      "type": "ore",
+      "block": "minecraft:iron_block",
+      "blockCount": "20",
+      "size": "9",
+      "minHeight": "0",
+      "maxHeight": "64",
+      "replaceable": [
+        "minecraft:dirt",
+        "minecraft:stone"
+      ],
+      "chunkChance": "20",
+      "biomeRestriction": "whitelist",
+      "biomes": [
+        "plains"
+      ],
+      "dimensionsRestriction": "blacklist",
+      "dimensions": [0]
+    }
+  ]
+}

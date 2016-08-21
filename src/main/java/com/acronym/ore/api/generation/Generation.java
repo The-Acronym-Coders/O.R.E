@@ -4,6 +4,7 @@ import com.google.common.primitives.Ints;
 import net.minecraft.block.Block;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -11,21 +12,25 @@ import java.util.Map;
  * Created by Jared on 8/4/2016.
  */
 public class Generation {
+    private String name = "";
     private String type = "";
     private Map<String, Object> params;
     private Class<? extends OreWorldGenerator> worldGenerator = null;
     private String block = "";
-    private int blockCount = 0;
-    private int size = 0;
-    private int minHeight = 0;
-    private int maxHeight = 0;
-    private int[] dimensions = new int[0];
+    private String blockCount = "0";
+    private String size = "0";
+    private String minHeight = "0";
+    private String maxHeight = "0";
     private String[] replaceable = new String[0];
-    private int chunkChance = 0;
-    private String biome = "__null";
+    private String chunkChance = "0";
+    private String biomeRestriction = "none";
+    private String[] biomes = new String[0];
+    private String dimensionsRestriction = "none";
+    private int[] dimensions = new int[0];
 
 
-    public Generation(Class<? extends OreWorldGenerator> type, Map<String, Object> params, String block, int blockCount, int size, String[] replaceable, int minHeight, int maxHeight, int[] dimensions, int chunkChance, String biome) {
+    public Generation(String name, Class<? extends OreWorldGenerator> type, Map<String, Object> params, String block, String blockCount, String size, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+        this.name = name;
         this.type = GenerationRegistry.getKeyFromGenerator(type);
         this.params = params;
         this.block = block;
@@ -35,12 +40,15 @@ public class Generation {
         this.replaceable = replaceable;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
+        this.dimensionsRestriction = dimensionsRestriction;
         this.dimensions = dimensions;
         this.chunkChance = chunkChance;
-        this.biome = biome;
+        this.biomeRestriction = biomeRestriction;
+        this.biomes = biomes;
     }
 
-    public Generation(String type, Map<String, Object> params, String block, int blockCount, int size, String[] replaceable, int minHeight, int maxHeight, int[] dimensions, int chunkChance, String biome) {
+    public Generation(String name, String type, Map<String, Object> params, String block, String blockCount, String size, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+        this.name = name;
         this.type = type;
         this.params = params;
         this.block = block;
@@ -50,18 +58,18 @@ public class Generation {
         this.replaceable = replaceable;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
+        this.dimensionsRestriction = dimensionsRestriction;
         this.dimensions = dimensions;
         this.chunkChance = chunkChance;
-        this.biome = biome;
+        this.biomeRestriction = biomeRestriction;
+        this.biomes = biomes;
+
     }
 
-    public int getBlockCount() {
-        return blockCount;
+    public Generation register() {
+        return new Generation(name, type, params, block, blockCount, size, replaceable, minHeight, maxHeight, dimensionsRestriction, dimensions, chunkChance, biomeRestriction, biomes);
     }
 
-    public void setBlockCount(int blockCount) {
-        this.blockCount = blockCount;
-    }
 
     public String getType() {
         return type;
@@ -87,14 +95,6 @@ public class Generation {
         this.block = block.getRegistryName().toString();
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     public List<Block> getReplaceable() {
         List<Block> blocks = new ArrayList<Block>();
         for (String s : replaceable) {
@@ -111,25 +111,6 @@ public class Generation {
         this.replaceable = repl;
     }
 
-    public int getMaxHeight() {
-        return maxHeight;
-    }
-
-    public void setMaxHeight(int maxHeight) {
-        this.maxHeight = maxHeight;
-    }
-
-    public int getMinHeight() {
-        return minHeight;
-    }
-
-    public void setMinHeight(int minHeight) {
-        this.minHeight = minHeight;
-    }
-
-    public Generation register() {
-        return new Generation(type, params, block, blockCount, size, replaceable, minHeight, maxHeight, dimensions, chunkChance, biome);
-    }
 
     public List<Integer> getDimensions() {
         return Ints.asList(dimensions);
@@ -140,20 +121,28 @@ public class Generation {
         this.dimensions = dimensions;
     }
 
-    public void setChunkChance(int chunkChance) {
-        this.chunkChance = chunkChance;
+    public String getBiomeRestriction() {
+        return biomeRestriction;
     }
 
-    public int getChunkChance() {
-        return chunkChance;
+    public void setBiomeRestriction(String biomeRestriction) {
+        this.biomeRestriction = biomeRestriction;
     }
 
-    public String getBiome() {
-        return biome;
+    public List<String> getBiomes() {
+        return Arrays.asList(biomes);
     }
 
-    public void setBiome(String biome) {
-        this.biome = biome;
+    public void setBiomes(String[] biomes) {
+        this.biomes = biomes;
+    }
+
+    public String getDimensionsRestriction() {
+        return dimensionsRestriction;
+    }
+
+    public void setDimensionsRestriction(String dimensionsRestriction) {
+        this.dimensionsRestriction = dimensionsRestriction;
     }
 
     public Map<String, Object> getParams() {
@@ -162,6 +151,62 @@ public class Generation {
 
     public void setParams(Map<String, Object> params) {
         this.params = params;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBlockCount() {
+        return blockCount;
+    }
+
+    public void setBlockCount(String blockCount) {
+        this.blockCount = blockCount;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getMinHeight() {
+        return minHeight;
+    }
+
+    public void setMinHeight(String minHeight) {
+        this.minHeight = minHeight;
+    }
+
+    public String getMaxHeight() {
+        return maxHeight;
+    }
+
+    public void setMaxHeight(String maxHeight) {
+        this.maxHeight = maxHeight;
+    }
+
+    public void setReplaceable(String[] replaceable) {
+        this.replaceable = replaceable;
+    }
+
+    public String getChunkChance() {
+        return chunkChance;
+    }
+
+    public void setChunkChance(String chunkChance) {
+        this.chunkChance = chunkChance;
+    }
+
+    public void setBlock(String block) {
+        this.block = block;
     }
 }
 

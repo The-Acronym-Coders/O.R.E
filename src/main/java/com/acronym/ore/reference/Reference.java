@@ -1,5 +1,6 @@
 package com.acronym.ore.reference;
 
+import javax.script.ScriptEngine;
 import java.io.File;
 
 /**
@@ -12,5 +13,7 @@ public class Reference {
     public static final String VERSION = "1.0.0";
 
     public static File CONFIG_DIR;
+
+    public static ScriptEngine ENGINE_JAVASCRIPT;
 
 }

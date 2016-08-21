@@ -1,17 +1,17 @@
 package com.acronym.ore;
 
 import com.acronym.ore.api.generation.GenerationRegistry;
+import com.acronym.ore.commands.CommandORE;
 import com.acronym.ore.config.Config;
+import com.acronym.ore.proxy.CommonProxy;
 import com.acronym.ore.reference.Reference;
 import com.acronym.ore.world.generators.OREWG;
 import com.acronym.ore.world.generators.feature.WorldGenOreGeode;
 import com.acronym.ore.world.generators.feature.WorldGenOreMinable;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,6 +27,9 @@ import static com.acronym.ore.reference.Reference.*;
 @Mod(modid = MODID, name = NAME, version = VERSION)
 public class ORE {
 
+    @SidedProxy(clientSide = "com.acronym.ore.proxy.ClientProxy", serverSide = "com.acronym.ore.proxy.CommonProxy")
+    public static CommonProxy PROXY;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 //        MinecraftForge.ORE_GEN_BUS.register(this);
@@ -38,6 +41,7 @@ public class ORE {
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
         Reference.CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + Reference.NAME + File.separator);
         Config.load();
+        PROXY.initEngines();
     }
 
     @Mod.EventHandler
@@ -49,7 +53,14 @@ public class ORE {
     }
 
     @Mod.EventHandler
-    public void loadcomplete(FMLServerStartedEvent event) {
+    public void loadcomplete(FMLLoadCompleteEvent event) {
+
+
+    }
+
+    @Mod.EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandORE());
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

@@ -10,21 +10,14 @@ import java.util.List;
  * Created by Jared on 8/4/2016.
  */
 public class GenerationRegistry {
-    private static BiMap<Integer, List<Generation>> generations = HashBiMap.create();
+    private static List<Generation> generations = new ArrayList<>();
     private static BiMap<String, Class<? extends OreWorldGenerator>> worldGeneratorMap = HashBiMap.create();
 
-    public static void addGeneratin(Generation gen) {
-        for (int i : gen.getDimensions()) {
-            List<Generation> gens = generations.get(i);
-            if(gens ==null){
-                gens = new ArrayList<Generation>();
-            }
-            gens.add(gen);
-            generations.put(i, gens);
-        }
+    public static void addGeneration(Generation gen) {
+        generations.add(gen);
     }
 
-    public static BiMap<Integer, List<Generation>> getGenerations() {
+    public static List<Generation> getGenerations() {
         return generations;
     }
 
@@ -36,10 +29,19 @@ public class GenerationRegistry {
         return getWorldGeneratorMap().inverse().get(gen);
     }
 
+
     public static Class<? extends OreWorldGenerator> getGeneratorFromKey(String key) {
         return getWorldGeneratorMap().get(key);
     }
 
+    public static Generation getGenerationFromName(String name) {
+        for (Generation gen : getGenerations()) {
+            if (gen.getName().equals(name)) {
+                return gen;
+            }
+        }
+        return null;
+    }
 
     public static BiMap<String, Class<? extends OreWorldGenerator>> getWorldGeneratorMap() {
         return worldGeneratorMap;
