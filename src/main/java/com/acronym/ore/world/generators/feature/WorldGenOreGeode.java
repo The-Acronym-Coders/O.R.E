@@ -37,6 +37,7 @@ public class WorldGenOreGeode extends OreWorldGenerator {
         this.numberOfBlocks = blockCount;
         this.predicate = predicate;
     }
+
     public boolean generate(World worldIn, Random rand, BlockPos position) {
         int width = 1;
         int height = 1;

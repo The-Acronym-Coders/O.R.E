@@ -31,7 +31,7 @@ public class ORE {
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event) throws Exception {
 //        MinecraftForge.ORE_GEN_BUS.register(this);
 //        MinecraftForge.TERRAIN_GEN_BUS.register(this);
 //        MinecraftForge.EVENT_BUS.register(this);

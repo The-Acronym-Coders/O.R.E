@@ -15,23 +15,24 @@ import java.util.Collection;
  * Created by Jared on 8/4/2016.
  */
 public class Config {
-    public static void load() {
+    public static void load() throws Exception {
         Configuration configuration = new Configuration(new File(Reference.CONFIG_DIR, String.format("%s.cfg", Reference.MODID)));
         configuration.load();
         registerJsons();
         configuration.save();
     }
 
-    public static void registerJsons() {
+    public static void registerJsons() throws Exception {
         File generation = new File(Reference.CONFIG_DIR, "generation.json");
-        //TODO create file from template if it doesn't exist
-//        if (!seed.exists()) {
-//            try {
-//                FileUtils.copyURLToFile(FluxedCrystals.class.getResource("/assets/" + Reference.modid + "/jsons/seedData.json"), seed);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
+        /*TODO create file from template if it doesn't exist
+        if (!seed.exists()) {
+            try {
+                FileUtils.copyURLToFile(FluxedCrystals.class.getResource("/assets/" + Reference.modid + "/jsons/seedData.json"), seed);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
 
         JSONParser<Generation> readerGeneration = new JSONParser<Generation>(generation, Generation.class);
         addGenerator(readerGeneration.getElements("ore"));
@@ -45,7 +46,7 @@ public class Config {
 
     public static boolean isBlock(ItemStack stack) {
         ResourceLocation name = Block.REGISTRY.getNameForObject(Block.getBlockFromItem(stack.getItem()));
-        return name != null && !name.toString().equals("minecraft:air") && Block.REGISTRY.containsKey(name);
+        return !name.toString().equals("minecraft:air") && Block.REGISTRY.containsKey(name);
     }
 
 }

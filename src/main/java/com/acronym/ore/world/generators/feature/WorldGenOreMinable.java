@@ -84,6 +84,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
 
                                     IBlockState state = worldIn.getBlockState(blockpos);
                                     boolean gen = false;
+
                                     if (force) {
                                         gen = true;
                                         System.out.println(gen + ":" + force);
@@ -98,8 +99,6 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                     if (gen) {
                                         worldIn.setBlockState(blockpos, this.oreBlock, 2);
                                     }
-
-
                                 }
                             }
                         }
@@ -159,7 +158,6 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                 }
             }
         }
-
         return true;
     }
 }

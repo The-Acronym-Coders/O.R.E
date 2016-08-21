@@ -43,20 +43,11 @@ public class CommandGenerate extends CommandBase {
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         Generation gen = GenerationRegistry.getGenerationFromName(args[1]);
-        if (gen == null) {
-            throw new CommandException("No Generation with that name!");
-        }
+        if (gen == null) throw new CommandException("No Generation with that name!");
+
         try {
             gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), gen.getSize(), gen.getParams()));
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (ScriptException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
             e.printStackTrace();
         }
     }
@@ -84,5 +75,5 @@ public class CommandGenerate extends CommandBase {
     }
 
 
-    //TODO add tab completiion
+    //TODO add tab completion
 }

@@ -20,6 +20,7 @@ public class JSONParser<T> {
 	public JSONParser(File file, Class<T> objClass) {
 		type = objClass;
 		fileToParse = file;
+
 		try {
 			root = parser.parse(new FileReader(file)).getAsJsonObject();
 		} catch (Exception e) {
@@ -37,7 +38,6 @@ public class JSONParser<T> {
 				}
 			}
 		}
-
 		return returnList;
 	}
 
