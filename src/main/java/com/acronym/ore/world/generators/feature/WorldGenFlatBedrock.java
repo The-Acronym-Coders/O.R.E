@@ -1,5 +1,6 @@
 package com.acronym.ore.world.generators.feature;
 
+import com.acronym.ore.config.Config;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +12,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
+import static com.acronym.ore.config.Config.*;
+
 /**
  * Created by EwyBoy
  **/
@@ -20,13 +23,13 @@ public class WorldGenFlatBedrock implements IWorldGenerator {
 
     IBlockState bedrock = Blocks.BEDROCK.getDefaultState();
 
-    public boolean canGenerate(World world, int chunkX, int chunkZ) {
-        return world.getWorldType() != WorldType.FLAT;
+    public boolean canGenerate(World world) {
+        return world.getWorldType() != WorldType.FLAT && Config.flatBedrock;
     }
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (canGenerate(world, chunkX, chunkZ)) generateFlatBedrock(world, chunkX, chunkZ);
+        if (canGenerate(world)) generateFlatBedrock(world, chunkX, chunkZ);
     }
 
     public void generateFlatBedrock(World world, int chunkX, int chunkZ) {
@@ -42,7 +45,7 @@ public class WorldGenFlatBedrock implements IWorldGenerator {
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < 5; y++) {
+                for (int y = 0; y < flatBedrockLayers; y++) {
                     BlockPos pos = new BlockPos(chunkX * 16 + x, y, chunkZ * 16 + z);
                     if (!world.getBlockState(pos).equals(bedrock)) world.setBlockState(pos, bedrock, flag);
                 }
@@ -55,7 +58,7 @@ public class WorldGenFlatBedrock implements IWorldGenerator {
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int y = 121; y < 126; y++) {
+                for (int y = 126 - flatBedrockLayers; y < 126; y++) {
                     BlockPos pos = new BlockPos(chunkX * 16 + x, y, chunkZ * 16 + z);
                     if (!world.getBlockState(pos).equals(bedrock)) world.setBlockState(pos, bedrock, flag);
                 }
