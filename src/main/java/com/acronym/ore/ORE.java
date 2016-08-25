@@ -4,6 +4,7 @@ import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.commands.CommandORE;
 import com.acronym.ore.config.Config;
 import com.acronym.ore.helpers.Debug;
+import com.acronym.ore.networking.PacketHandler;
 import com.acronym.ore.proxy.CommonProxy;
 import com.acronym.ore.reference.Reference;
 import com.acronym.ore.world.generators.OREWG;
@@ -31,16 +32,21 @@ import static com.acronym.ore.reference.Reference.Paths.COMMON_PROXY;
 @Mod(modid = MODID, name = NAME, version = BUILD_VERSION)
 public class ORE {
 
+    @Mod.Instance(Reference.ModInfo.MODID)
+    public static ORE instance;
+
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) throws Exception {
+    public void preInit(FMLPreInitializationEvent event) {
         //MinecraftForge.ORE_GEN_BUS.register(this);
         //MinecraftForge.TERRAIN_GEN_BUS.register(this);
         //MinecraftForge.EVENT_BUS.register(this);
         //MinecraftForge.EVENT_BUS.register(new RetroGen());
 
+
+        PacketHandler.registerMessages(MODID);
         Debug.initKeyBindings();
         MinecraftForge.EVENT_BUS.register(new Debug());
         GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);

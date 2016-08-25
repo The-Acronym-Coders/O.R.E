@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static com.acronym.ore.config.Config.*;
+import static com.acronym.ore.config.Config.flatBedrockLayers;
 
 /**
  * Created by EwyBoy

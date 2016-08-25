@@ -10,7 +10,7 @@ import java.io.File;
  */
 public class Config {
 
-    public static void load() throws Exception {
+    public static void load() {
         Configuration config = new Configuration(new File(Reference.CONFIG_DIR, String.format("%s.cfg", Reference.ModInfo.NAME)));
 
         config.load();

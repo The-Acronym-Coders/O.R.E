@@ -1,9 +1,8 @@
 package com.acronym.ore.helpers;
 
-import net.minecraft.client.Minecraft;
+import com.acronym.ore.networking.PacketHandler;
+import com.acronym.ore.networking.PacketSendKey;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -25,18 +24,8 @@ public class Debug {
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        World world = Minecraft.getMinecraft().theWorld;
-
         if (Debug.debug.isPressed()) {
-            stripWorld(world, player);
-        }
-    }
-
-    public void stripWorld(World world, EntityPlayer player) {
-        Logger.info("Hello from the other side?!");
-        for (int y = player.getPosition().getY(); y > 0; y--){
-            world.setBlockToAir(player.getPosition().down(y));
+            PacketHandler.INSTANCE.sendToServer(new PacketSendKey());
         }
     }
 }
