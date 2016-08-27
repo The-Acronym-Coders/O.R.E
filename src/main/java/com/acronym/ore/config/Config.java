@@ -1,9 +1,12 @@
 package com.acronym.ore.config;
 
+import com.acronym.ore.api.generation.Generation;
+import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
+import java.util.Collection;
 
 /**
  * Created by Jared & Ewy
@@ -14,8 +17,12 @@ public class Config {
         Configuration config = new Configuration(new File(Reference.CONFIG_DIR, String.format("%s.cfg", Reference.ModInfo.NAME)));
 
         config.load();
-            //registerJsons();
-            registerConfigurations(config);
+        try {
+            registerJsons();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        registerConfigurations(config);
         config.save();
     }
 
@@ -34,48 +41,26 @@ public class Config {
 
     }
 
-}
 
+    public static void registerJsons() throws Exception {
+        File generation = new File(Reference.CONFIG_DIR, "generation.json");
 
+        /* TODO create file from template if it doesn't exist
+         if (!seed.exists()) {
+         try {
+         FileUtils.copyURLToFile(FluxedCrystals.class.getResource("/assets/" + Reference.modid + "/jsons/seedData.json"), seed);
+         } catch (IOException e) {
+         e.printStackTrace();
+         }
+         }*/
 
+        JSONParser<Generation> readerGeneration = new JSONParser<>(generation, Generation.class);
+        addGenerator(readerGeneration.getElements("ore"));
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- *
- * public static void registerJsons() throws Exception {
- File generation = new File(Reference.CONFIG_DIR, "generation.json");
-
- /*TODO create file from template if it doesn't exist
- if (!seed.exists()) {
- try {
- FileUtils.copyURLToFile(FluxedCrystals.class.getResource("/assets/" + Reference.modid + "/jsons/seedData.json"), seed);
- } catch (IOException e) {
- e.printStackTrace();
- }
- }
-
-JSONParser<Generation> readerGeneration = new JSONParser<>(generation, Generation.class);
-    addGenerator(readerGeneration.getElements("ore"));
-        }
-
-public static void addGenerator(Collection<? extends Generation> types) {
+    public static void addGenerator(Collection<? extends Generation> types) {
         for (Generation type : types) {
-        GenerationRegistry.addGeneration(type.register());
+            GenerationRegistry.addGeneration(type.register());
         }
-        }
- *
- */
+    }
+}

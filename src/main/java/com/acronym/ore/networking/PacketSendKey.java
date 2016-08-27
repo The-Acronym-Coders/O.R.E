@@ -2,10 +2,8 @@ package com.acronym.ore.networking;
 
 import com.acronym.ore.config.Config;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -20,24 +18,11 @@ import static net.minecraft.init.Blocks.*;
  **/
 public class PacketSendKey implements IMessage {
 
-    private BlockPos blockPos;
+    @Override
+    public void fromBytes(ByteBuf buf) {}
 
     @Override
-    public void fromBytes(ByteBuf buf) {
-        blockPos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
-    }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeInt(blockPos.getX());
-        buf.writeInt(blockPos.getY());
-        buf.writeInt(blockPos.getZ());
-    }
-
-    public PacketSendKey() {
-        RayTraceResult result = Minecraft.getMinecraft().objectMouseOver;
-        blockPos = result.getBlockPos();
-    }
+    public void toBytes(ByteBuf buf) {}
 
     public static class Handler implements IMessageHandler<PacketSendKey, IMessage> {
 
