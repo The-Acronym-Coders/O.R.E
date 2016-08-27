@@ -18,9 +18,9 @@ import java.util.Random;
 
 public class WorldGenOreMinable extends OreWorldGenerator {
     private final IBlockState oreBlock;
-    /**
-     * The number of blocks to generate.
-     */
+
+
+    //The number of blocks to generate.
     private final int numberOfBlocks;
     private final List<BlockMatcher> predicates;
 

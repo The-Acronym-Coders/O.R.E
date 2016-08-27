@@ -39,34 +39,21 @@ public class WorldGenOreGeode extends OreWorldGenerator {
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {
-        int width = 1;
-        int height = 1;
-        boolean hollow = false;
-        for (Map.Entry<String, Object> ent : getParams().entrySet()) {
-            switch (ent.getKey()) {
-                case "width":
-                    width = Integer.parseInt((ent.getValue() + "").replace(".0", ""));
-                    break;
-                case "height":
-                    height = Integer.parseInt((ent.getValue() + "").replace(".0", ""));
-                    break;
-                case "hollow":
-                    hollow = (boolean) ent.getValue();
-                    break;
-                default:
-                    System.out.println(String.format("Unknown Param: %s, with Value: %s", ent.getKey(), ent.getValue()));
-                    break;
-            }
-        }
-        //example of how to use the "params":{}
+        generateGeode();
         return false;
     }
 
     @Override
     public boolean generateFromCommand(World worldIn, Random rand, BlockPos position) {
+        generateGeode();
+        return false;
+    }
+
+    private void generateGeode() {
         int width = 1;
         int height = 1;
         boolean hollow = false;
+
         for (Map.Entry<String, Object> ent : getParams().entrySet()) {
             switch (ent.getKey()) {
                 case "width":
@@ -83,7 +70,5 @@ public class WorldGenOreGeode extends OreWorldGenerator {
                     break;
             }
         }
-        //example of how to use the "params":{}
-        return false;
     }
 }
