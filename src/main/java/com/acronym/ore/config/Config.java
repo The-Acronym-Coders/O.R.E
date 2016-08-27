@@ -43,7 +43,7 @@ public class Config {
 
 
     public static void registerJsons() throws Exception {
-        File generation = new File(Reference.CONFIG_DIR, "generation.json");
+
 
         /* TODO create file from template if it doesn't exist
          if (!seed.exists()) {
@@ -53,9 +53,10 @@ public class Config {
          e.printStackTrace();
          }
          }*/
-
-        JSONParser<Generation> readerGeneration = new JSONParser<>(generation, Generation.class);
-        addGenerator(readerGeneration.getElements("ore"));
+        for (File f : Reference.CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json"))) {
+            JSONParser<Generation> readerGeneration = new JSONParser<>(f, Generation.class);
+            addGenerator(readerGeneration.getElements("ore"));
+        }
     }
 
     public static void addGenerator(Collection<? extends Generation> types) {

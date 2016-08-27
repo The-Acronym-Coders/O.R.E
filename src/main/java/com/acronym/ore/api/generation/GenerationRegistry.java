@@ -1,5 +1,6 @@
 package com.acronym.ore.api.generation;
 
+import com.acronym.ore.helpers.Logger;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -14,6 +15,10 @@ public class GenerationRegistry {
     private static BiMap<String, Class<? extends OreWorldGenerator>> worldGeneratorMap = HashBiMap.create();
 
     public static void addGeneration(Generation gen) {
+        if (generations.contains(gen)) {
+            Logger.error(String.format("Tried registering duplicate generation with name %s.", gen.getName()));
+            return;
+        }
         generations.add(gen);
     }
 
