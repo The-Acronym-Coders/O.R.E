@@ -51,4 +51,8 @@ public class GenerationRegistry {
     public static BiMap<String, Class<? extends OreWorldGenerator>> getWorldGeneratorMap() {
         return worldGeneratorMap;
     }
+
+    public static class GetSomeCommonSenseException extends Exception {
+
+    }
 }

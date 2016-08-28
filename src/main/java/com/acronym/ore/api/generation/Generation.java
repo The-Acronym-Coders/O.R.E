@@ -17,8 +17,8 @@ public class Generation {
     private Map<String, Object> params;
     private Class<? extends OreWorldGenerator> worldGenerator = null;
     private String block = "";
+    private String genTries = "0";
     private String blockCount = "0";
-    private String size = "0";
     private String minHeight = "0";
     private String maxHeight = "0";
     private String[] replaceable = new String[0];
@@ -29,14 +29,14 @@ public class Generation {
     private int[] dimensions = new int[0];
 
 
-    public Generation(String name, Class<? extends OreWorldGenerator> type, Map<String, Object> params, String block, String blockCount, String size, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, Class<? extends OreWorldGenerator> type, Map<String, Object> params, String block, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = GenerationRegistry.getKeyFromGenerator(type);
         this.params = params;
         this.block = block;
         this.worldGenerator = type;
+        this.genTries = genTries;
         this.blockCount = blockCount;
-        this.size = size;
         this.replaceable = replaceable;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
@@ -47,14 +47,14 @@ public class Generation {
         this.biomes = biomes;
     }
 
-    public Generation(String name, String type, Map<String, Object> params, String block, String blockCount, String size, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, String type, Map<String, Object> params, String block, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = type;
         this.params = params;
         this.block = block;
         this.worldGenerator = GenerationRegistry.getGeneratorFromKey(type);
+        this.genTries = genTries;
         this.blockCount = blockCount;
-        this.size = size;
         this.replaceable = replaceable;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
@@ -67,7 +67,7 @@ public class Generation {
     }
 
     public Generation register() {
-        return new Generation(name, type, params, block, blockCount, size, replaceable, minHeight, maxHeight, dimensionsRestriction, dimensions, chunkChance, biomeRestriction, biomes);
+        return new Generation(name, type, params, block, genTries, blockCount, replaceable, minHeight, maxHeight, dimensionsRestriction, dimensions, chunkChance, biomeRestriction, biomes);
     }
 
 
@@ -161,20 +161,20 @@ public class Generation {
         this.name = name;
     }
 
+    public String getGenTries() {
+        return genTries;
+    }
+
+    public void setGenTries(String genTries) {
+        this.genTries = genTries;
+    }
+
     public String getBlockCount() {
         return blockCount;
     }
 
     public void setBlockCount(String blockCount) {
         this.blockCount = blockCount;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public String getMinHeight() {

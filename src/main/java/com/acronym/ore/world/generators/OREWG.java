@@ -35,7 +35,7 @@ public class OREWG implements IWorldGenerator {
                                 switch (gen.getBiomeRestriction()) {
                                     case "none":
                                         try {
-                                            gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                            gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                                             e.printStackTrace();
                                         }
@@ -43,7 +43,7 @@ public class OREWG implements IWorldGenerator {
                                     case "whitelist":
                                         if (checkbiome(gen, world.getBiomeGenForCoords(bp)))
                                             try {
-                                                gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                             } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                                                 e.printStackTrace();
                                             }
@@ -51,7 +51,7 @@ public class OREWG implements IWorldGenerator {
                                     case "blacklist":
                                         if (!checkbiome(gen, world.getBiomeGenForCoords(bp)))
                                             try {
-                                                gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                             } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                                                 e.printStackTrace();
                                             }
@@ -68,7 +68,7 @@ public class OREWG implements IWorldGenerator {
                                     switch (gen.getBiomeRestriction()) {
                                         case "none":
                                             try {
-                                                gen(world, random, bp, (int)((double) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())), gen.getWorldGenerator().getConstructor(Generation.class).newInstance(gen), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                gen(world, random, bp, (int)((double) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())), gen.getWorldGenerator().getConstructor(Generation.class).newInstance(gen), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                                                 e.printStackTrace();
                                             }
@@ -76,7 +76,7 @@ public class OREWG implements IWorldGenerator {
                                         case "whitelist":
                                             if (checkbiome(gen, world.getBiomeGenForCoords(bp)))
                                                 try {
-                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                                                     e.printStackTrace();
                                                 }
@@ -84,7 +84,7 @@ public class OREWG implements IWorldGenerator {
                                         case "blacklist":
                                             if (!checkbiome(gen, world.getBiomeGenForCoords(bp)))
                                                 try {
-                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                                                     e.printStackTrace();
                                                 }
@@ -102,7 +102,7 @@ public class OREWG implements IWorldGenerator {
                                     switch (gen.getBiomeRestriction()) {
                                         case "none":
                                             try {
-                                                gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                             } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                                                 e.printStackTrace();
                                             }
@@ -110,7 +110,7 @@ public class OREWG implements IWorldGenerator {
                                         case "whitelist":
                                             if (checkbiome(gen, world.getBiomeGenForCoords(bp)))
                                                 try {
-                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                                 } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                                                     e.printStackTrace();
                                                 }
@@ -118,7 +118,7 @@ public class OREWG implements IWorldGenerator {
                                         case "blacklist":
                                             if (!checkbiome(gen, world.getBiomeGenForCoords(bp)))
                                                 try {
-                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getSize()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                    gen(world, random, bp, (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getParams()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                                 } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                                                     e.printStackTrace();
                                                 }

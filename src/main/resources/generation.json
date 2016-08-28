@@ -32,6 +32,11 @@
       "size": "9",
       "minHeight": "0",
       "maxHeight": "24*6",
+	  "params": {
+        "width": 26,
+        "height": 8,
+        "hollow": true
+      },
       "replaceable": [
         "minecraft:dirt",
         "minecraft:stone",
