@@ -1,7 +1,6 @@
 package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -29,7 +28,7 @@ public class WorldGenOreCluster extends OreWorldGenerator {
         BlockPos genPos = new BlockPos(random.nextInt(16), 32, random.nextInt(16));
 
         for (int i = 0; i < 10; i++) {
-            new WorldGenOreMinable(Blocks.EMERALD_ORE, 10);
+
         }
     }
 }
