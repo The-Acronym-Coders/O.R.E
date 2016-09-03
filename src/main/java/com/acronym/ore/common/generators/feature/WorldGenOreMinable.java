@@ -3,7 +3,6 @@ package com.acronym.ore.common.generators.feature;
 import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import com.acronym.ore.common.reference.Reference;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
@@ -15,10 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class WorldGenOreMinable extends OreWorldGenerator {
-    private final IBlockState oreBlock;
 
+    private final IBlockState oreBlock;
 
     //The number of blocks to generate.
     private final int numberOfBlocks;
@@ -26,7 +26,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
 
 
     public WorldGenOreMinable(IBlockState state, int blockCount, Map<String, Object> params) {
-        this(state, blockCount, new ArrayList<BlockMatcher>(), params);
+        this(state, blockCount, new ArrayList<>(), params);
     }
 
     public WorldGenOreMinable(IBlockState state, int blockCount, List<BlockMatcher> predicate, Map<String, Object> params) {
@@ -39,9 +39,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
 
     public WorldGenOreMinable(Generation gen) throws ScriptException {
         this(gen.getBlock().getDefaultState(), (int) (Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())), gen.getParams());
-        for (Block block : gen.getReplaceable()) {
-            this.predicates.add(BlockMatcher.forBlock(block));
-        }
+        this.predicates.addAll(gen.getReplaceable().stream().map(BlockMatcher::forBlock).collect(Collectors.toList()));
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {

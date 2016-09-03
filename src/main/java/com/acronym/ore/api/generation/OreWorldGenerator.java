@@ -12,6 +12,7 @@ import java.util.Random;
  * Created by Jared on 8/4/2016.
  */
 public abstract class OreWorldGenerator extends WorldGenerator {
+
     private Block block;
     private int size;
     private Map<String, Object> params;
@@ -31,8 +32,7 @@ public abstract class OreWorldGenerator extends WorldGenerator {
     }
 
 
-    public OreWorldGenerator() {
-    }
+    public OreWorldGenerator() {}
 
     public Block getBlock() {
         return block;
