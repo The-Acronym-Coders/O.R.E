@@ -29,16 +29,19 @@ public class Config {
     public static boolean debugMode;
     public static boolean flatBedrock;
     public static int flatBedrockLayers;
+    public static int chuckRadius;
+
 
     public static void registerConfigurations(Configuration config) {
+        //Debug
+        debugMode = config.getBoolean("Debug Mode", Reference.ConfigCategories.DEBUG, false, "WARNING! ONLY FOR DEVELOPERS");
+        chuckRadius = config.getInt("Chunk Radius", Reference.ConfigCategories.DEBUG, 3, 1, 12, "Sets the amount of chunks to clear (Chunk * Chunk)");
 
         //Toggables
-        debugMode = config.getBoolean("Debug Mode", Reference.ConfigCategories.TOGGABLES, false, "WARNING! ONLY FOR DEVELOPERS");
         flatBedrock = config.getBoolean("Flat Bedrock", Reference.ConfigCategories.TOGGABLES, true, "Toggle flat bedrock generation");
 
         //Values
         flatBedrockLayers = config.getInt("Flat Bedrock Layers", Reference.ConfigCategories.VALUES, 5, 5, 256, "Tweak the amount of bedrock layers generated");
-
     }
 
 

@@ -26,9 +26,13 @@ public class Reference {
     public static final class ConfigCategories {
         public static final String TOGGABLES = "Toggables";
         public static final String VALUES = "Values";
+        public static final String DEBUG = "Debug";
     }
 
     public static File CONFIG_DIR;
     public static ScriptEngine ENGINE_JAVASCRIPT;
 
+    public static final class Keybinding {
+        public static final String KeybindingName = "Strip World";
+    }
 }
