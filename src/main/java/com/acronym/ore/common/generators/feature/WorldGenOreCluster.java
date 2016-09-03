@@ -17,7 +17,16 @@ public class WorldGenOreCluster extends OreWorldGenerator {
     }
 
     @Override
-    public boolean generate(World worldIn, Random rand, BlockPos position) {
+    public boolean generate(World world, Random random, BlockPos position) {
+        switch (world.provider.getDimension()) {
+            case 0: generateCluster(world, random, position);
+        }
         return false;
+    }
+
+    private void generateCluster(World world, Random random, BlockPos position) {
+        for (int i = 0; i < 10; i++) {
+
+        }
     }
 }

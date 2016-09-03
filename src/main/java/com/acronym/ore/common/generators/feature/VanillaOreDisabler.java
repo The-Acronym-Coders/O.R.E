@@ -15,7 +15,7 @@ import static net.minecraftforge.fml.common.eventhandler.Event.Result.DENY;
  **/
 public class VanillaOreDisabler {
 
-    private static Set<EventType> vanillaOres = new THashSet<EventType>();
+    private static Set<EventType> vanillaOres = new THashSet<>();
 
     static {
         vanillaOres.add(COAL);
@@ -36,15 +36,13 @@ public class VanillaOreDisabler {
     
     @SubscribeEvent
     public void denyAllVanillaOreGeneration(GenerateMinable event) {
-        if (vanillaOres.contains(event.getType()))
-            event.setResult(DENY);
+        if (vanillaOres.contains(event.getType())) event.setResult(DENY);
     }
 
-    /**
-     * TODO Add if statements here depending on boolean from config is true or false to disable specific world-gen
-     */
+
+    //TODO Add if statements here depending on boolean from config is true or false to disable specific world-gen
     @SubscribeEvent
-    public void denySpecificVanillaOreGeneration(GenerateMinable event) {
+    public void onGenerateMinable(GenerateMinable event) {
         switch (event.getType()) {
             case COAL:
                 event.setResult(DENY);
