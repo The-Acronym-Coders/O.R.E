@@ -38,8 +38,8 @@ public class ORE {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        PROXY.registerKeybindings();
         PacketHandler.registerMessages(Reference.ModInfo.MODID);
+        PROXY.registerKeybindings();
         GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);
         GenerationRegistry.registerWorldGenerator("geode", WorldGenOreGeode.class);
         GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);

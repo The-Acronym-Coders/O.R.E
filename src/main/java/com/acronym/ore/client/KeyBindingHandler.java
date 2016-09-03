@@ -1,5 +1,7 @@
 package com.acronym.ore.client;
 
+import com.acronym.ore.common.network.PacketHandler;
+import com.acronym.ore.common.network.PacketStripWorld;
 import com.acronym.ore.common.reference.Reference;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -19,6 +21,6 @@ public class KeyBindingHandler {
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        //if (strip.isPressed()) PacketHandler.INSTANCE.sendToServer(new PacketStripWorld());
+        if (strip.isPressed()) PacketHandler.INSTANCE.sendToServer(new PacketStripWorld());
     }
 }
