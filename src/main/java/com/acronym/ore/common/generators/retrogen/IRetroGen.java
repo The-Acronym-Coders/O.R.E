@@ -1,4 +1,4 @@
-package com.acronym.ore.world.generators.retrogen;
+package com.acronym.ore.common.generators.retrogen;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;

@@ -1,13 +1,13 @@
-package com.acronym.ore.world.generators.feature.retro;
+package com.acronym.ore.common.generators.feature.retro;
 
-import com.acronym.ore.world.generators.feature.WorldGenFlatBedrock;
-import com.acronym.ore.world.generators.retrogen.IRetroGen;
+import com.acronym.ore.common.generators.feature.WorldGenFlatBedrock;
+import com.acronym.ore.common.generators.retrogen.IRetroGen;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.Random;
 
-import static com.acronym.ore.reference.Reference.ModInfo.MODID;
+import static com.acronym.ore.common.reference.Reference.ModInfo.MODID;
 
 /**
  * Created by EwyBoy

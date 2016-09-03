@@ -1,4 +1,4 @@
-package com.acronym.ore.world.generators.feature;
+package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import net.minecraft.util.math.BlockPos;

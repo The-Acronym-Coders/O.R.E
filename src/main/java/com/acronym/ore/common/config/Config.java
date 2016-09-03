@@ -1,8 +1,8 @@
-package com.acronym.ore.config;
+package com.acronym.ore.common.config;
 
 import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.GenerationRegistry;
-import com.acronym.ore.reference.Reference;
+import com.acronym.ore.common.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;

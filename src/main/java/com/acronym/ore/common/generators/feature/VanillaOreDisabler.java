@@ -1,4 +1,4 @@
-package com.acronym.ore.world.generators.feature;
+package com.acronym.ore.common.generators.feature;
 
 import gnu.trove.set.hash.THashSet;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

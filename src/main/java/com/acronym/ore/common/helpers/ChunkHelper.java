@@ -1,4 +1,4 @@
-package com.acronym.ore.helpers;
+package com.acronym.ore.common.helpers;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;

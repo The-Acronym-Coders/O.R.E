@@ -1,6 +1,6 @@
-package com.acronym.ore.world.generators.feature;
+package com.acronym.ore.common.generators.feature;
 
-import com.acronym.ore.config.Config;
+import com.acronym.ore.common.config.Config;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static com.acronym.ore.config.Config.flatBedrockLayers;
+import static com.acronym.ore.common.config.Config.flatBedrockLayers;
 
 /**
  * Created by EwyBoy

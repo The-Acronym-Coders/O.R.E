@@ -1,4 +1,4 @@
-package com.acronym.ore.helpers;
+package com.acronym.ore.common.helpers;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

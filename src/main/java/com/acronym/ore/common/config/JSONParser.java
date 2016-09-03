@@ -1,4 +1,4 @@
-package com.acronym.ore.config;
+package com.acronym.ore.common.config;
 
 import com.google.gson.*;
 

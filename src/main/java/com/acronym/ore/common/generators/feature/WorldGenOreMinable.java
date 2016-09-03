@@ -1,8 +1,8 @@
-package com.acronym.ore.world.generators.feature;
+package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import com.acronym.ore.reference.Reference;
+import com.acronym.ore.common.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;

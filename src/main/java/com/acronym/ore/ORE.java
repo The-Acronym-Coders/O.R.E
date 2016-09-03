@@ -1,18 +1,16 @@
 package com.acronym.ore;
 
 import com.acronym.ore.api.generation.GenerationRegistry;
-import com.acronym.ore.commands.CommandORE;
-import com.acronym.ore.config.Config;
-import com.acronym.ore.helpers.Debug;
-import com.acronym.ore.networking.PacketHandler;
+import com.acronym.ore.common.commands.CommandORE;
+import com.acronym.ore.common.config.Config;
 import com.acronym.ore.proxy.CommonProxy;
-import com.acronym.ore.reference.Reference;
-import com.acronym.ore.world.generators.OREWG;
-import com.acronym.ore.world.generators.feature.WorldGenFlatBedrock;
-import com.acronym.ore.world.generators.feature.WorldGenOreGeode;
-import com.acronym.ore.world.generators.feature.WorldGenOreMinable;
-import com.acronym.ore.world.generators.feature.retro.RetroGenFlatBedrock;
-import com.acronym.ore.world.generators.retrogen.RetroGen;
+import com.acronym.ore.common.reference.Reference;
+import com.acronym.ore.common.generators.OREWG;
+import com.acronym.ore.common.generators.feature.WorldGenFlatBedrock;
+import com.acronym.ore.common.generators.feature.WorldGenOreGeode;
+import com.acronym.ore.common.generators.feature.WorldGenOreMinable;
+import com.acronym.ore.common.generators.feature.retro.RetroGenFlatBedrock;
+import com.acronym.ore.common.generators.retrogen.RetroGen;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,9 +23,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.io.File;
 
-import static com.acronym.ore.reference.Reference.ModInfo.*;
-import static com.acronym.ore.reference.Reference.Paths.CLIENT_PROXY;
-import static com.acronym.ore.reference.Reference.Paths.COMMON_PROXY;
+import static com.acronym.ore.common.reference.Reference.ModInfo.*;
+import static com.acronym.ore.common.reference.Reference.Paths.CLIENT_PROXY;
+import static com.acronym.ore.common.reference.Reference.Paths.COMMON_PROXY;
 
 @Mod(modid = MODID, name = NAME, version = BUILD_VERSION)
 public class ORE {

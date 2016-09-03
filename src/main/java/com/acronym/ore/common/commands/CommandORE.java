@@ -1,4 +1,4 @@
-package com.acronym.ore.commands;
+package com.acronym.ore.common.commands;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

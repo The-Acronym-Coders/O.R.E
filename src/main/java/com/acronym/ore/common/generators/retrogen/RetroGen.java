@@ -1,6 +1,6 @@
-package com.acronym.ore.world.generators.retrogen;
+package com.acronym.ore.common.generators.retrogen;
 
-import com.acronym.ore.helpers.ChunkHelper;
+import com.acronym.ore.common.helpers.ChunkHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;

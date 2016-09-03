@@ -1,9 +1,9 @@
-package com.acronym.ore.helpers;
+package com.acronym.ore.common.helpers;
 
 import net.minecraftforge.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
-import static com.acronym.ore.reference.Reference.ModInfo.NAME;
+import static com.acronym.ore.common.reference.Reference.ModInfo.NAME;
 
 /**
  * Created by EwyBoy
