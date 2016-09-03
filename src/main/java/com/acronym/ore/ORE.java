@@ -3,15 +3,14 @@ package com.acronym.ore;
 import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.common.commands.CommandORE;
 import com.acronym.ore.common.config.Config;
-import com.acronym.ore.proxy.CommonProxy;
-import com.acronym.ore.common.reference.Reference;
 import com.acronym.ore.common.generators.OREWG;
 import com.acronym.ore.common.generators.feature.WorldGenFlatBedrock;
 import com.acronym.ore.common.generators.feature.WorldGenOreGeode;
 import com.acronym.ore.common.generators.feature.WorldGenOreMinable;
 import com.acronym.ore.common.generators.feature.retro.RetroGenFlatBedrock;
 import com.acronym.ore.common.generators.retrogen.RetroGen;
-import net.minecraftforge.common.MinecraftForge;
+import com.acronym.ore.common.reference.Reference;
+import com.acronym.ore.proxy.CommonProxy;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -38,9 +37,6 @@ public class ORE {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        PacketHandler.registerMessages();
-        Debug.initKeyBindings();
-        MinecraftForge.EVENT_BUS.register(new Debug());
         GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);
         GenerationRegistry.registerWorldGenerator("geode", WorldGenOreGeode.class);
         GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
