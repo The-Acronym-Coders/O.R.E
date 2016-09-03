@@ -16,7 +16,7 @@ import static net.minecraft.init.Blocks.*;
 /**
  * Created by EwyBoy
  **/
-public class PacketSendKey implements IMessage {
+public class PacketSendKey implements IMessage{
 
     @Override
     public void fromBytes(ByteBuf buf) {}

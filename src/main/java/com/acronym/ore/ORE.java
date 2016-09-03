@@ -40,13 +40,7 @@ public class ORE {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //MinecraftForge.ORE_GEN_BUS.register(this);
-        //MinecraftForge.TERRAIN_GEN_BUS.register(this);
-        //MinecraftForge.EVENT_BUS.register(this);
-        //MinecraftForge.EVENT_BUS.register(new RetroGen());
-
-
-        PacketHandler.registerMessages(MODID);
+        PacketHandler.registerMessages();
         Debug.initKeyBindings();
         MinecraftForge.EVENT_BUS.register(new Debug());
         GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);
