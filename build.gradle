@@ -18,7 +18,7 @@ group= "com.ewyboy.ore"
 archivesBaseName = "O.R.E"
 
 minecraft {
-    version = "1.9.4-12.17.0.1962"
+    version = "1.10.2-12.18.1.2075"
     runDir = "run"
     
     mappings = "snapshot_20160518"
