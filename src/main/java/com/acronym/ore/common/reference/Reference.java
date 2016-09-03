@@ -1,4 +1,4 @@
-package com.acronym.ore.reference;
+package com.acronym.ore.common.reference;
 
 import javax.script.ScriptEngine;
 import java.io.File;

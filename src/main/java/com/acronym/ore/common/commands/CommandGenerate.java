@@ -1,9 +1,9 @@
-package com.acronym.ore.commands;
+package com.acronym.ore.common.commands;
 
 import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import com.acronym.ore.reference.Reference;
+import com.acronym.ore.common.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

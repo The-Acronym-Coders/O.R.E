@@ -1,6 +1,6 @@
 package com.acronym.ore.proxy;
 
-import com.acronym.ore.reference.Reference;
+import com.acronym.ore.common.reference.Reference;
 
 import javax.script.ScriptEngineManager;
 

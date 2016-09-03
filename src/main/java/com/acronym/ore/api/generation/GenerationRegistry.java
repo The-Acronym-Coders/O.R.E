@@ -1,6 +1,6 @@
 package com.acronym.ore.api.generation;
 
-import com.acronym.ore.helpers.Logger;
+import com.acronym.ore.common.helpers.Logger;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
