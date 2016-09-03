@@ -60,13 +60,16 @@ public class ORE {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {}
+    public void init(FMLInitializationEvent event) {
+    }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 
     @Mod.EventHandler
-    public void loadcomplete(FMLLoadCompleteEvent event) {}
+    public void loadcomplete(FMLLoadCompleteEvent event) {
+    }
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {

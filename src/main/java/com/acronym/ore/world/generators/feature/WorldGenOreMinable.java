@@ -38,7 +38,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
 
 
     public WorldGenOreMinable(Generation gen) throws ScriptException {
-        this(gen.getBlock().getDefaultState(), (int) (Reference.ENGINE_JAVASCRIPT.eval(gen.getSize())), gen.getParams());
+        this(gen.getBlock().getDefaultState(), (int) (Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())), gen.getParams());
         for (Block block : gen.getReplaceable()) {
             this.predicates.add(BlockMatcher.forBlock(block));
         }

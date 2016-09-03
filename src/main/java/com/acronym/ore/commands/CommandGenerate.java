@@ -46,7 +46,7 @@ public class CommandGenerate extends CommandBase {
         if (gen == null) throw new CommandException("No Generation with that name!");
 
         try {
-            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), gen.getSize(), gen.getParams()));
+            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), gen.getBlockCount(), gen.getParams()));
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
             e.printStackTrace();
         }

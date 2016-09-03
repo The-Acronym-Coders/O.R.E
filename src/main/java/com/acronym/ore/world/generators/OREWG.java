@@ -68,7 +68,7 @@ public class OREWG implements IWorldGenerator {
                                     switch (gen.getBiomeRestriction()) {
                                         case "none":
                                             try {
-                                                gen(world, random, bp, (int)((double) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())), gen.getWorldGenerator().getConstructor(Generation.class).newInstance(gen), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
+                                                gen(world, random, bp, (int) ((double) Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())), gen.getWorldGenerator().getConstructor(Generation.class).newInstance(gen), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight()), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()));
                                             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                                                 e.printStackTrace();
                                             }
