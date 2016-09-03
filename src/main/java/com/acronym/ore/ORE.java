@@ -31,7 +31,7 @@ import static com.acronym.ore.common.reference.Reference.Paths.COMMON_PROXY;
 public class ORE {
 
     @Mod.Instance(Reference.ModInfo.MODID)
-    public static ORE instance;
+    public static ORE INSTANCE;
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy PROXY;
