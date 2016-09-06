@@ -4,7 +4,6 @@ import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import com.acronym.ore.common.reference.Reference;
-import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -46,7 +45,7 @@ public class CommandGenerate extends CommandBase {
         if (gen == null) throw new CommandException("No Generation with that name!");
 
         try {
-            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Block.class, int.class, Map.class).newInstance(gen.getBlock(), gen.getBlockCount(), gen.getParams()));
+            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Map.class, int.class, Map.class).newInstance(gen.getBlocks(), gen.getBlockCount(), gen.getParams()));
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
             e.printStackTrace();
         }

@@ -3,9 +3,11 @@
     {
       "name": "testGeode",
       "type": "geode",
-      "block": "minecraft:diamond_block",
-      "blockCount": "4",
-      "size": "9",
+      "blocks": {
+        "minecraft:diamond_block": 5
+      },
+      "genTries": "4",
+      "blockCount": "9",
       "minHeight": "0",
       "maxHeight": "128",
       "replaceable": [
@@ -27,12 +29,16 @@
     {
       "name": "testOreGold",
       "type": "ore",
-      "block": "minecraft:gold_block",
-      "blockCount": "if(typeof size =='undefined'){size = 2} Math.round(size+=1)",
-      "size": "9",
+      "blocks": {
+        "minecraft:gold_block": 5,
+        "minecraft:iron_block": 2,
+        "minecraft:bedrock": 1
+      },
+      "genTries": "if(typeof size =='undefined'){size = 2} Math.round(size+=1)",
+      "blockCount": "9",
       "minHeight": "0",
       "maxHeight": "24*6",
-	  "params": {
+      "params": {
         "width": 26,
         "height": 8,
         "hollow": true
@@ -48,14 +54,20 @@
         "forest"
       ],
       "dimensionsRestriction": "whitelist",
-      "dimensions": [0]
+      "dimensions": [
+        0
+      ]
     },
     {
       "name": "testOreIron",
       "type": "ore",
-      "block": "minecraft:iron_block",
-      "blockCount": "20",
-      "size": "9",
+      "blocks": {
+        "minecraft:gold_block": 2,
+        "minecraft:iron_block": 5,
+        "minecraft:glass": 1
+      },
+      "genTries": "20",
+      "blockCount": "9",
       "minHeight": "0",
       "maxHeight": "64",
       "replaceable": [
@@ -68,7 +80,9 @@
         "plains"
       ],
       "dimensionsRestriction": "blacklist",
-      "dimensions": [0]
+      "dimensions": [
+        0
+      ]
     }
   ]
 }

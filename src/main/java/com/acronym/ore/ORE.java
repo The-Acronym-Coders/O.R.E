@@ -37,6 +37,7 @@ public class ORE {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        PROXY.initEngines();
         MinecraftForge.ORE_GEN_BUS.register(new VanillaOreDisabler());
         PacketHandler.registerMessages(MODID);
         PROXY.registerKeybindings();
@@ -47,7 +48,7 @@ public class ORE {
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
         Reference.CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + NAME + File.separator);
         Config.load();
-        PROXY.initEngines();
+
     }
 
     @Mod.EventHandler

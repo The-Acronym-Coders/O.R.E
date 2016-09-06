@@ -1,46 +1,35 @@
 package com.acronym.ore.common.generators.feature;
 
-import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import com.acronym.ore.common.reference.Reference;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import javax.script.ScriptException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class WorldGenOreMinable extends OreWorldGenerator {
 
-    private final IBlockState oreBlock;
-
-    //The number of blocks to generate.
+    private final Map<Block, Integer> blocks;
+    /**
+     * The number of blocks to generate.
+     */
     private final int numberOfBlocks;
     private final List<BlockMatcher> predicates;
 
 
-    public WorldGenOreMinable(IBlockState state, int blockCount, Map<String, Object> params) {
-        this(state, blockCount, new ArrayList<>(), params);
-    }
 
-    public WorldGenOreMinable(IBlockState state, int blockCount, List<BlockMatcher> predicate, Map<String, Object> params) {
-        super(state.getBlock(), blockCount, params);
-        this.oreBlock = state;
+    public WorldGenOreMinable(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+        super(blocks, blockCount, params);
+        this.blocks = blocks;
         this.numberOfBlocks = blockCount;
-        this.predicates = predicate;
+        this.predicates = predicates;
     }
 
-
-    public WorldGenOreMinable(Generation gen) throws ScriptException {
-        this(gen.getBlock().getDefaultState(), (int) (Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())), gen.getParams());
-        this.predicates.addAll(gen.getReplaceable().stream().map(BlockMatcher::forBlock).collect(Collectors.toList()));
-    }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {
         float f = rand.nextFloat() * (float) Math.PI;
@@ -95,7 +84,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                         }
                                     }
                                     if (gen) {
-                                        worldIn.setBlockState(blockpos, this.oreBlock, 2);
+                                        worldIn.setBlockState(blockpos, getRandomBlock().getDefaultState(),2);
                                     }
                                 }
                             }
@@ -148,7 +137,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
 
                                     IBlockState state = worldIn.getBlockState(blockpos);
-                                    worldIn.setBlockState(blockpos, this.oreBlock, 2);
+                                    worldIn.setBlockState(blockpos, getRandomBlock().getDefaultState(),2);
                                 }
                             }
                         }
@@ -158,4 +147,6 @@ public class WorldGenOreMinable extends OreWorldGenerator {
         }
         return true;
     }
+
+
 }

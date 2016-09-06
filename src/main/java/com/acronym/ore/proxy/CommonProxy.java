@@ -12,7 +12,9 @@ public class CommonProxy {
     public void registerKeybindings() {}
 
     public void initEngines(){
-        Reference.ENGINE_JAVASCRIPT = new ScriptEngineManager().getEngineByName("JavaScript");//getEngineByExtension("JavaScript");
+        ScriptEngineManager manager = new ScriptEngineManager();
+        Reference.ENGINE_JAVASCRIPT = manager.getEngineByExtension("js");
+        System.out.println(">>> " + Reference.ENGINE_JAVASCRIPT);
     }
 
 }

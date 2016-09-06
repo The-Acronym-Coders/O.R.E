@@ -1,14 +1,12 @@
 package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -16,26 +14,18 @@ import java.util.Random;
  * Created by Jared on 8/19/2016.
  */
 public class WorldGenOreGeode extends OreWorldGenerator {
-    private final IBlockState oreBlock;
+    private final Map<Block, Integer> blocks;
     /**
      * The number of blocks to generate.
      */
     private final int numberOfBlocks;
-    private final Predicate<IBlockState> predicate;
+    private final List<BlockMatcher> predicates;
 
-    public WorldGenOreGeode(Block block, int blockCount, Map<String, Object> params) {
-        this(block.getDefaultState(), blockCount, params);
-    }
-
-    public WorldGenOreGeode(IBlockState state, int blockCount, Map<String, Object> params) {
-        this(state, blockCount, BlockMatcher.forBlock(Blocks.STONE), params);
-    }
-
-    public WorldGenOreGeode(IBlockState state, int blockCount, Predicate<IBlockState> predicate, Map<String, Object> params) {
-        super(state.getBlock(), blockCount, params);
-        this.oreBlock = state;
+    public WorldGenOreGeode(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+        super(blocks, blockCount, params);
+        this.blocks = blocks;
         this.numberOfBlocks = blockCount;
-        this.predicate = predicate;
+        this.predicates = predicates;
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {

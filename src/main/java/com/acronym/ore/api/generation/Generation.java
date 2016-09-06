@@ -3,20 +3,17 @@ package com.acronym.ore.api.generation;
 import com.google.common.primitives.Ints;
 import net.minecraft.block.Block;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Jared on 8/4/2016.
  */
 public class Generation {
-    private String name = "";
-    private String type = "";
-    private Map<String, Object> params;
+    private String name = "defaultName";
+    private String type = "defaultType";
+    private Map<String, Object> params = new HashMap<>();
     private Class<? extends OreWorldGenerator> worldGenerator = null;
-    private String block = "";
+    private Map<String, Integer> blocks = new HashMap<>();
     private String genTries = "0";
     private String blockCount = "0";
     private String minHeight = "0";
@@ -28,12 +25,11 @@ public class Generation {
     private String dimensionsRestriction = "none";
     private int[] dimensions = new int[0];
 
-
-    public Generation(String name, Class<? extends OreWorldGenerator> type, Map<String, Object> params, String block, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, Class<? extends OreWorldGenerator> type, Map<String, Object> params, Map<String, Integer> blocks, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = GenerationRegistry.getKeyFromGenerator(type);
         this.params = params;
-        this.block = block;
+        this.blocks = blocks;
         this.worldGenerator = type;
         this.genTries = genTries;
         this.blockCount = blockCount;
@@ -47,11 +43,11 @@ public class Generation {
         this.biomes = biomes;
     }
 
-    public Generation(String name, String type, Map<String, Object> params, String block, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, String type, Map<String, Object> params, Map<String, Integer> blocks, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = type;
         this.params = params;
-        this.block = block;
+        this.blocks = blocks;
         this.worldGenerator = GenerationRegistry.getGeneratorFromKey(type);
         this.genTries = genTries;
         this.blockCount = blockCount;
@@ -63,11 +59,10 @@ public class Generation {
         this.chunkChance = chunkChance;
         this.biomeRestriction = biomeRestriction;
         this.biomes = biomes;
-
     }
 
     public Generation register() {
-        return new Generation(name, type, params, block, genTries, blockCount, replaceable, minHeight, maxHeight, dimensionsRestriction, dimensions, chunkChance, biomeRestriction, biomes);
+        return new Generation(name, type, params, blocks, genTries, blockCount, replaceable, minHeight, maxHeight, dimensionsRestriction, dimensions, chunkChance, biomeRestriction, biomes);
     }
 
 
@@ -87,12 +82,20 @@ public class Generation {
         this.worldGenerator = worldGenerator;
     }
 
-    public Block getBlock() {
-        return Block.getBlockFromName(this.block);
+    public List<Block> getBlocksList() {
+        List<Block> blocks = new ArrayList<>();
+        this.blocks.keySet().forEach(bl -> blocks.add(Block.getBlockFromName(bl)));
+        return blocks;
+    }
+    public Map<Block, Integer> getBlocks(){
+        Map<Block, Integer> blockMap = new HashMap<>();
+        blocks.forEach((key, value)-> blockMap.put(Block.getBlockFromName(key), value));
+        return blockMap;
     }
 
-    public void setBlock(Block block) {
-        this.block = block.getRegistryName().toString();
+
+    public void setBlocks(Map<String, Integer> blocks) {
+        this.blocks = blocks;
     }
 
     public List<Block> getReplaceable() {
@@ -205,8 +208,27 @@ public class Generation {
         this.chunkChance = chunkChance;
     }
 
-    public void setBlock(String block) {
-        this.block = block;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Generation{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", type='").append(type).append('\'');
+        sb.append(", params=").append(params);
+        sb.append(", worldGenerator=").append(worldGenerator);
+        sb.append(", blocks=").append(blocks);
+        sb.append(", genTries='").append(genTries).append('\'');
+        sb.append(", blockCount='").append(blockCount).append('\'');
+        sb.append(", minHeight='").append(minHeight).append('\'');
+        sb.append(", maxHeight='").append(maxHeight).append('\'');
+        sb.append(", replaceable=").append(Arrays.toString(replaceable));
+        sb.append(", chunkChance='").append(chunkChance).append('\'');
+        sb.append(", biomeRestriction='").append(biomeRestriction).append('\'');
+        sb.append(", biomes=").append(Arrays.toString(biomes));
+        sb.append(", dimensionsRestriction='").append(dimensionsRestriction).append('\'');
+        sb.append(", dimensions=").append(Arrays.toString(dimensions));
+        sb.append('}');
+        return sb.toString();
     }
 }
 

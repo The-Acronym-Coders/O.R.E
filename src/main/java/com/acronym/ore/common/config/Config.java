@@ -46,16 +46,8 @@ public class Config {
 
 
     public static void registerJsons() throws Exception {
-
-
-        /* TODO create file from template if it doesn't exist
-         if (!seed.exists()) {
-         try {
-         FileUtils.copyURLToFile(FluxedCrystals.class.getResource("/assets/" + Reference.modid + "/jsons/seedData.json"), seed);
-         } catch (IOException e) {
-         e.printStackTrace();
-         }
-         }*/
+        System.out.println(">>> files");
+        System.out.println(Reference.CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json")));
         for (File f : Reference.CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json"))) {
             JSONParser<Generation> readerGeneration = new JSONParser<>(f, Generation.class);
             addGenerator(readerGeneration.getElements("ore"));
@@ -64,6 +56,7 @@ public class Config {
 
     public static void addGenerator(Collection<? extends Generation> types) {
         for (Generation type : types) {
+            System.out.println("adding" + type.getName());
             GenerationRegistry.addGeneration(type.register());
         }
     }
