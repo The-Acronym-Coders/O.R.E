@@ -33,8 +33,7 @@ public abstract class OreWorldGenerator extends WorldGenerator {
     }
 
 
-    public OreWorldGenerator() {
-    }
+    public OreWorldGenerator() {}
 
     public Map<Block, Integer> getBlocks() {
         return blocks;
@@ -61,7 +60,7 @@ public abstract class OreWorldGenerator extends WorldGenerator {
 
     public Block getRandomBlock() {
         Random random = new Random();
-        return blocks.entrySet().stream().map(e -> new AbstractMap.SimpleEntry<Block, Double>(e.getKey(), -Math.log(random.nextDouble()) / e.getValue()))
+        return blocks.entrySet().stream().map(e -> new AbstractMap.SimpleEntry<>(e.getKey(), -Math.log(random.nextDouble()) / e.getValue()))
                 .min((e0, e1) -> e0.getValue().compareTo(e1.getValue()))
                 .orElseThrow(IllegalArgumentException::new).getKey();
     }

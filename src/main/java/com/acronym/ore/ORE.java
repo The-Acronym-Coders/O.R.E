@@ -4,13 +4,9 @@ import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.common.commands.CommandORE;
 import com.acronym.ore.common.config.Config;
 import com.acronym.ore.common.generators.OREWG;
-import com.acronym.ore.common.generators.feature.VanillaOreDisabler;
-import com.acronym.ore.common.generators.feature.WorldGenFlatBedrock;
-import com.acronym.ore.common.generators.feature.WorldGenOreGeode;
-import com.acronym.ore.common.generators.feature.WorldGenOreMinable;
+import com.acronym.ore.common.generators.feature.*;
 import com.acronym.ore.common.generators.feature.retro.RetroGenFlatBedrock;
 import com.acronym.ore.common.generators.retrogen.RetroGen;
-import com.acronym.ore.common.network.PacketHandler;
 import com.acronym.ore.common.reference.Reference;
 import com.acronym.ore.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,16 +35,15 @@ public class ORE {
     public void preInit(FMLPreInitializationEvent event) {
         PROXY.initEngines();
         MinecraftForge.ORE_GEN_BUS.register(new VanillaOreDisabler());
-        PacketHandler.registerMessages(MODID);
         PROXY.registerKeybindings();
         GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);
+        GenerationRegistry.registerWorldGenerator("vein", WorldGenOreVein.class);
         GenerationRegistry.registerWorldGenerator("geode", WorldGenOreGeode.class);
         GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
         RetroGen.registerRetroGenerator(new RetroGenFlatBedrock());
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
         Reference.CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + NAME + File.separator);
         Config.load();
-
     }
 
     @Mod.EventHandler
