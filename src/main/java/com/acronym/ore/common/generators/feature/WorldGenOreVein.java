@@ -2,7 +2,6 @@ package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -42,35 +41,27 @@ public class WorldGenOreVein extends OreWorldGenerator {
     }
 
     private void generateOreVein(World world, Random random, BlockPos pos) {
-        int veinSize;
-        int minVeinSize = 3; //TODO Read from file
-        int maxVeinSize = 8; //TODO Read from file
-        int minSpawnWeight = 2; //TODO Read from file
-        int maxSpawnWeight = 8; //TODO Read from file
-        int spawnHeight;
-        int minSpawnHeight = pos.getY(); //TODO Read from file
-        int maxSpawnHeight = pos.getY(); //TODO Read from file
-        int chunkX;
-        int chunkZ;
+        int minVeinSize = 4; //TODO Read from file
+        int maxVeinSize = 12; //TODO Read from file
 
         for (int i = 0; i < this.numberOfBlocks ; i++) {
-            spawnHeight = (int)(Math.random() * ((maxSpawnHeight - minSpawnHeight) + minSpawnHeight));
-            veinSize = (int)(Math.random() * ((maxVeinSize - minVeinSize)+ minVeinSize));
-            chunkX = random.nextInt(16); chunkZ = random.nextInt(16);
-            BlockPos veinSingularity = pos.add(chunkX, spawnHeight, chunkZ);
+            int veinSize = (int)(Math.random() * ((maxVeinSize - minVeinSize) + minVeinSize));
 
-            oreVeinGenerator(world, veinSingularity);
+            int posX = pos.getX() + (veinSize / 2);
+            int negX = pos.getX() - (veinSize / 2);
+            int posY = pos.getY() + (veinSize / 2);
+            int negY = pos.getY() - (veinSize / 2);
+            int posZ = pos.getZ() + (veinSize / 2);
+            int negZ = pos.getZ() - (veinSize / 2);
+
+            for (int x = negX; negX <= posX; ++x) {
+                for (int y = negY; negY <= posY; ++negY) {
+                    for (int z = negZ; negZ <= posZ; ++negZ) {
+                        BlockPos spawnPos = new BlockPos(x,y,z);
+                        world.setBlockState(spawnPos, getRandomBlock().getDefaultState(), 2);
+                    }
+                }
+            }
         }
-    }
-
-    private void oreVeinGenerator(World world, BlockPos pos) {
-        world.setBlockState(pos, getRandomBlock().getDefaultState(), 2);
-    }
-
-    private static void helixPattern(World world, IBlockState blockState, BlockPos pos, double x, double y, double z, int flag) {
-        world.setBlockState(pos.add(x, y, z), blockState, flag);
-        world.setBlockState(pos.add(x, y, -z), blockState, flag);
-        world.setBlockState(pos.add(-x, y, z), blockState, flag);
-        world.setBlockState(pos.add(-x, y, -z), blockState, flag);
     }
 }
