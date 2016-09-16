@@ -17,9 +17,10 @@
       ],
       "chunkChance": "100",
       "params": {
-        "width": 26,
-        "height": 8,
-        "hollow": true
+        "width": 4,
+        "height": 4,
+        "hollow": true,
+        "fillBlock":"minecraft:diamond_block"
       },
       "biomeRestriction": "none",
       "biomes": [],
@@ -39,8 +40,8 @@
       "minHeight": "0",
       "maxHeight": "24*6",
       "params": {
-        "width": 26,
-        "height": 8,
+        "width": 4,
+        "height": 4,
         "hollow": true
       },
       "replaceable": [
