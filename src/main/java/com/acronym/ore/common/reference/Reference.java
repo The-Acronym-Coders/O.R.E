@@ -31,8 +31,4 @@ public class Reference {
 
     public static File CONFIG_DIR;
     public static ScriptEngine ENGINE_JAVASCRIPT;
-
-    public static final class Keybinding {
-        public static final String KeybindingName = "Strip World";
-    }
 }

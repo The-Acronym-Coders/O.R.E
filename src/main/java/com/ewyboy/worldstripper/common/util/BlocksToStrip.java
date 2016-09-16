@@ -1,4 +1,4 @@
-package com.acronym.ore.common.helpers;
+package com.ewyboy.worldstripper.common.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -29,4 +29,5 @@ public class BlocksToStrip {
         blockList.add(Blocks.LEAVES);
         blockList.add(Blocks.LEAVES2);
     }
+
 }
