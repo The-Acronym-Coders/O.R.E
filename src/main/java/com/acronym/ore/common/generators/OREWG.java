@@ -27,15 +27,17 @@ public class OREWG implements IWorldGenerator {
 
         try {
             GenerationRegistry.getGenerations().stream().filter(gen -> {
-                if (gen.getDimensions().equals("none")) {
+                System.out.println(gen.getDimensions());
+                if (gen.getDimensionsRestriction().equals("none")) {
                     return true;
-                } else if (gen.getDimensions().equals("whitelist")) {
+                } else if (gen.getDimensionsRestriction().equals("whitelist")) {
                     return gen.getDimensions().contains(world.provider.getDimension());
                 } else {
                     return !gen.getDimensions().contains(world.provider.getDimension());
                 }
             }).filter(gen -> {
                 int chance = random.nextInt(99);
+                System.out.println(chance);
                 if (chance != 0)
                     try {
                         if (chance + 1 < (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
@@ -55,6 +57,7 @@ public class OREWG implements IWorldGenerator {
                 } else {
                     canGen = !checkbiome(gen, world.getBiomeGenForCoords(bp));
                 }
+                System.out.println(canGen);
                 if (canGen) {
                     try {
                         List<BlockMatcher> matcher = new ArrayList<BlockMatcher>();
