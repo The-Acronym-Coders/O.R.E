@@ -17,12 +17,12 @@ public class Config {
         Configuration config = new Configuration(new File(Reference.CONFIG_DIR, String.format("%s.cfg", Reference.ModInfo.NAME)));
 
         config.load();
-            try {
-                registerJsons();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            registerConfigurations(config);
+        try {
+            registerJsons();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        registerConfigurations(config);
         config.save();
     }
 

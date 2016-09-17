@@ -16,10 +16,10 @@ import java.util.Random;
  */
 public abstract class OreWorldGenerator extends WorldGenerator {
 
-    private Map<Block, Integer> blocks;
-    private int size;
-    private Map<String, Object> params;
-    public boolean force;
+    public Map<Block, Integer> blocks;
+    public int size;
+    public Map<String, Object> params;
+    public boolean force;   
 
     public OreWorldGenerator() {
     }
