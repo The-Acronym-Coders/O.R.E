@@ -9,15 +9,15 @@ import net.minecraft.util.math.BlockPos;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Jared on 8/20/2016.
  */
 public class CommandORE extends CommandBase {
 
-
-    private static List<CommandBase> modCommands = new ArrayList<CommandBase>();
-    private static List<String> commands = new ArrayList<String>();
+    private static List<CommandBase> modCommands = new ArrayList<>();
+    private static List<String> commands = new ArrayList<>();
 
     @Override
     public String getCommandName() {
@@ -51,12 +51,8 @@ public class CommandORE extends CommandBase {
             }
         }
         return null;
-    }
-
-    static {
+    } static {
         modCommands.add(new CommandGenerate());
-        for (CommandBase commandBase : modCommands) {
-            commands.add(commandBase.getCommandName());
-        }
+        commands.addAll(modCommands.stream().map(CommandBase::getCommandName).collect(Collectors.toList()));
     }
 }

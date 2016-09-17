@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.acronym.ore.common.reference.Reference.ENGINE_JAVASCRIPT;
+import static com.acronym.ore.common.reference.Reference.Directories.ENGINE_JAVASCRIPT;
 
 /**
  * Created by Jared on 7/24/2016.
@@ -27,17 +27,16 @@ public class OREWG implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         try {
             GenerationRegistry.getGenerations().stream().filter(gen -> {
-                System.out.println(gen.getDimensions());
-                if (gen.getDimensionsRestriction().equals("none")) {
-                    return true;
-                } else if (gen.getDimensionsRestriction().equals("whitelist")) {
-                    return gen.getDimensions().contains(world.provider.getDimension());
-                } else {
-                    return !gen.getDimensions().contains(world.provider.getDimension());
+                switch (gen.getDimensionsRestriction()) {
+                    case "none":
+                        return true;
+                    case "whitelist":
+                        return gen.getDimensions().contains(world.provider.getDimension());
+                    default:
+                        return !gen.getDimensions().contains(world.provider.getDimension());
                 }
             }).filter(gen -> {
                 int chance = random.nextInt(99);
-                System.out.println(chance);
                 if (chance != 0)
                     try {
                         if (chance + 1 < (int) ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
@@ -49,20 +48,23 @@ public class OREWG implements IWorldGenerator {
                 return false;
             }).forEach(gen -> {
                 boolean canGen = false;
-                BlockPos bp = new BlockPos(chunkX * 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
-                if (gen.getBiomeRestriction().equals("none")) {
-                    canGen = true;
-                } else if (gen.getBiomeRestriction().equals("whitelist")) {
-                    canGen = checkbiome(gen, world.getBiomeGenForCoords(bp));
-                } else {
-                    canGen = !checkbiome(gen, world.getBiomeGenForCoords(bp));
+                BlockPos pos = new BlockPos(chunkX * 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
+                switch (gen.getBiomeRestriction()) {
+                    case "none":
+                        canGen = true;
+                        break;
+                    case "whitelist":
+                        canGen = checkbiome(gen, world.getBiomeGenForCoords(pos));
+                        break;
+                    default:
+                        canGen = !checkbiome(gen, world.getBiomeGenForCoords(pos));
+                        break;
                 }
-                System.out.println(canGen);
                 if (canGen) {
                     try {
                         List<BlockMatcher> matcher = new ArrayList<>();
                         gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-                        gen(world, random, bp, new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getGenTries()))).intValue(), gen.getWorldGenerator().create(gen.getBlocks(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getBlockCount()))).intValue(), matcher, gen.getParams()), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMinHeight()))).intValue(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()))).intValue());
+                        gen(world, random, pos, new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getGenTries()))).intValue(), gen.getWorldGenerator().create(gen.getBlocks(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getBlockCount()))).intValue(), matcher, gen.getParams()), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMinHeight()))).intValue(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()))).intValue());
                     } catch (ScriptException e) {
                         e.printStackTrace();
                     }
@@ -106,7 +108,6 @@ public class OREWG implements IWorldGenerator {
                 --minHeight;
             }
         }
-
         for (int j = 0; j < blockCount; ++j) {
             BlockPos blockpos = pos.add(0, random.nextInt(maxHeight - minHeight) + minHeight, 0);
             generator.generate(worldIn, random, blockpos);

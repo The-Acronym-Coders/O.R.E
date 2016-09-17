@@ -1,6 +1,6 @@
 package com.acronym.ore.common.generators.feature;
 
-import com.acronym.ore.common.config.Config;
+import com.acronym.ore.common.directories.Config;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import static com.acronym.ore.common.config.Config.flatBedrockLayers;
+import static com.acronym.ore.common.directories.Config.flatBedrockLayers;
 
 /**
  * Created by EwyBoy
@@ -29,15 +29,33 @@ public class WorldGenFlatBedrock implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (canGenerate(world)) generateFlatBedrock(world, chunkX, chunkZ);
+        if (canGenerate(world)) {
+            switch (world.provider.getDimensionType()) {
+                case OVERWORLD:
+                    generateFlatBedrockBottom(world, chunkX, chunkZ, false);
+                    break;
+                case NETHER:
+                    generateFlatBedrockTop(world, chunkX, chunkZ, false);
+                    generateFlatBedrockBottom(world, chunkX, chunkZ, false);
+                    break;
+                default : break;
+            }
+        }
     }
 
-    public void generateFlatBedrock(World world, int chunkX, int chunkZ) {
-        generateFlatBedrockBottom(world, chunkX, chunkZ, false);
-    }
-
-    public void retroGenerateFlatBedrock(World world, int chunkX, int chunkZ) {
-        generateFlatBedrockBottom(world, chunkX, chunkZ, true);
+    public void retroGenerate(World world, int chunkX, int chunkZ) {
+        if (canGenerate(world)) {
+            switch (world.provider.getDimensionType()) {
+                case OVERWORLD:
+                    generateFlatBedrockBottom(world, chunkX, chunkZ, true);
+                    break;
+                case NETHER:
+                    generateFlatBedrockTop(world, chunkX, chunkZ, true);
+                    generateFlatBedrockBottom(world, chunkX, chunkZ, true);
+                    break;
+                default : break;
+            }
+        }
     }
 
     private void generateFlatBedrockTop(World world, int chunkX, int chunkZ, boolean retroGen) {

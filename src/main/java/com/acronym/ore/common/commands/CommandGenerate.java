@@ -40,12 +40,13 @@ public class CommandGenerate extends CommandBase {
         Generation gen = GenerationRegistry.getGenerationFromName(args[1]);
         if (gen == null) throw new CommandException("No Generation with that name!");
 
-//        try {
-            //TODO
-//            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Map.class, int.class, Map.class).newInstance(gen.getBlocks(), gen.getBlockCount(), gen.getParams()));
-//        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
-//            e.printStackTrace();
-//        }
+        //TODO whatever this shit is @Jared
+        /*try {
+
+            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Map.class, int.class, Map.class).newInstance(gen.getBlocks(), gen.getBlockCount(), gen.getParams()));
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
+            e.printStackTrace();
+        }*/
     }
 
     protected void gen(World worldIn, Random random, BlockPos pos, int blockCount, OreWorldGenerator generator) {
@@ -69,7 +70,6 @@ public class CommandGenerate extends CommandBase {
         }
         return super.getTabCompletionOptions(server, sender, args, pos);
     }
-
 
     //TODO add tab completion
 }

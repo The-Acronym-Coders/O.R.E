@@ -51,9 +51,6 @@ public class WorldGenOreCluster extends OreWorldGenerator {
 
     private void generateCluster(World world, Random random, BlockPos position) {
         BlockPos genPos = new BlockPos(random.nextInt(16), 32, random.nextInt(16));
-
-        for (int i = 0; i < 10; i++) {
-
-        }
+        for (int i = 0; i < 10; i++) {}
     }
 }
