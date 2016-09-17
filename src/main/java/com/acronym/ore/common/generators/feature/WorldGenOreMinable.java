@@ -75,7 +75,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                 if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D) {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
 
-                                    IBlockState state = worldIn.getBlockState(blockpos);
+                                    IBlockState state = world.getBlockState(blockpos);
                                     boolean gen = false;
 
                                     if (force) {
@@ -83,7 +83,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                         System.out.println(gen + ":" + force);
                                     } else {
                                         for (BlockMatcher match : predicates) {
-                                            if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, match)) {
+                                            if (state.getBlock().isReplaceableOreGen(state, world, blockpos, match)) {
                                                 gen = true;
                                                 break;
                                             }
@@ -93,7 +93,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                         world.setBlockState(blockpos, getRandomBlock().getDefaultState(), 2);
                                     }
                                     if (gen) {
-                                        worldIn.setBlockState(blockpos, getRandomBlock().getDefaultState(), 2);
+                                        world.setBlockState(blockpos, getRandomBlock().getDefaultState(), 2);
                                     }
                                 }
                             }

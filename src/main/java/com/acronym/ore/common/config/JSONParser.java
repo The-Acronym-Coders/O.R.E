@@ -12,8 +12,8 @@ public class JSONParser<T> {
 	public File fileToParse;
 	public Class<T> type;
 
-	private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	private static final JsonParser parser = new JsonParser();
+	private  final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private  final JsonParser parser = new JsonParser();
 
 	private JsonObject root;
 
