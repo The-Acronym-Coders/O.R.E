@@ -71,12 +71,10 @@ public class ORE {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
         MinecraftForge.ORE_GEN_BUS.register(new VanillaOreDisabler());
         RetroGen.registerRetroGenerator(new RetroGenFlatBedrock());
         GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
-
     }
 
     @Mod.EventHandler
