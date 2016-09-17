@@ -46,10 +46,6 @@ public class ORE {
         PROXY.initEngines();
         GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
         GenerationRegistry.registerWorldGenerator("vein", new WorldGenOreVein());
-        GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
-        RetroGen.registerRetroGenerator(new RetroGenFlatBedrock());
-        GameRegistry.registerWorldGenerator(new OREWG(), 0);
-        MinecraftForge.ORE_GEN_BUS.register(new VanillaOreDisabler());
         PacketHandler.registerMessages(MODID);
         PROXY.registerKeybindings();
         Reference.CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + NAME + File.separator);
