@@ -3,7 +3,6 @@ package com.acronym.ore.common.generators;
 import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import com.acronym.ore.common.reference.Reference;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.acronym.ore.common.reference.Reference.ENGINE_JAVASCRIPT;
+
 /**
  * Created by Jared on 7/24/2016.
  */
@@ -24,7 +25,6 @@ public class OREWG implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-
         try {
             GenerationRegistry.getGenerations().stream().filter(gen -> {
                 System.out.println(gen.getDimensions());
@@ -40,7 +40,7 @@ public class OREWG implements IWorldGenerator {
                 System.out.println(chance);
                 if (chance != 0)
                     try {
-                        if (chance + 1 < (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
+                        if (chance + 1 < (int) ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
                             return true;
                         }
                     } catch (ScriptException e) {
@@ -60,9 +60,9 @@ public class OREWG implements IWorldGenerator {
                 System.out.println(canGen);
                 if (canGen) {
                     try {
-                        List<BlockMatcher> matcher = new ArrayList<BlockMatcher>();
+                        List<BlockMatcher> matcher = new ArrayList<>();
                         gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-                        gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().create(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
+                        gen(world, random, bp, new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getGenTries()))).intValue(), gen.getWorldGenerator().create(gen.getBlocks(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getBlockCount()))).intValue(), matcher, gen.getParams()), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMinHeight()))).intValue(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()))).intValue());
                     } catch (ScriptException e) {
                         e.printStackTrace();
                     }
@@ -71,132 +71,6 @@ public class OREWG implements IWorldGenerator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        try {
-//            for (Generation gen : GenerationRegistry.getGenerations()) {
-//                switch (gen.getDimensionsRestriction()) {
-//                    case "none":
-//                        int chance = random.nextInt(99);
-//                        if (chance != 0)
-//                            if (chance + 1 < (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
-//                                BlockPos bp = new BlockPos(chunkX * 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
-//                                switch (gen.getBiomeRestriction()) {
-//                                    case "none":
-//                                        try {
-//                                            List<BlockMatcher> matcher = new ArrayList<BlockMatcher>();
-//                                            gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                            gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                        } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                        break;
-//                                    case "whitelist":
-//                                        if (checkbiome(gen, world.getBiomeGenForCoords(bp)))
-//                                            try {
-//                                                List<BlockMatcher> matcher = new ArrayList<>();
-//                                                gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                            } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                        break;
-//                                    case "blacklist":
-//                                        if (!checkbiome(gen, world.getBiomeGenForCoords(bp)))
-//                                            try {
-//                                                List<BlockMatcher> matcher = new ArrayList<>();
-//                                                gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                            } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                        break;
-//                                }
-//                            }
-//                        break;
-//                    case "whitelist":
-//                        if (checkDimension(gen, world.provider.getDimension())) {
-//                            int whiteListChance = random.nextInt(99);
-//                            if (whiteListChance != 0)
-//                                if (whiteListChance + 1 < (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
-//                                    BlockPos bp = new BlockPos(chunkX * 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
-//                                    switch (gen.getBiomeRestriction()) {
-//                                        case "none":
-//                                            try {
-//                                                List<BlockMatcher> matcher = new ArrayList<>();
-//                                                gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                            break;
-//                                        case "whitelist":
-//                                            if (checkbiome(gen, world.getBiomeGenForCoords(bp)))
-//                                                try {
-//                                                    List<BlockMatcher> matcher = new ArrayList<>();
-//                                                    gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                    gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            break;
-//                                        case "blacklist":
-//                                            if (!checkbiome(gen, world.getBiomeGenForCoords(bp)))
-//                                                try {
-//                                                    List<BlockMatcher> matcher = new ArrayList<>();
-//                                                    gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                    gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            break;
-//                                    }
-//                                }
-//                        }
-//                        break;
-//                    case "blacklist":
-//                        if (!checkDimension(gen, world.provider.getDimension())) {
-//                            int blackListChance = random.nextInt(99);
-//                            if (blackListChance != 0)
-//                                if (blackListChance + 1 < (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
-//                                    BlockPos bp = new BlockPos(chunkX * 16, 0, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16));
-//                                    switch (gen.getBiomeRestriction()) {
-//                                        case "none":
-//                                            try {
-//                                                List<BlockMatcher> matcher = new ArrayList<>();
-//                                                gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                            } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                            break;
-//                                        case "whitelist":
-//                                            if (checkbiome(gen, world.getBiomeGenForCoords(bp)))
-//                                                try {
-//                                                    List<BlockMatcher> matcher = new ArrayList<>();
-//                                                    gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                    gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            break;
-//                                        case "blacklist":
-//                                            if (!checkbiome(gen, world.getBiomeGenForCoords(bp)))
-//                                                try {
-//                                                    List<BlockMatcher> matcher = new ArrayList<>();
-//                                                    gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-//                                                    gen(world, random, bp, new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getGenTries())).intValue(), gen.getWorldGenerator().getConstructor(Map.class, int.class, List.class, Map.class).newInstance(gen.getBlocks(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount())).intValue(), matcher, gen.getParams()), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMinHeight())).intValue(), new Double("" + Reference.ENGINE_JAVASCRIPT.eval(gen.getMaxHeight())).intValue());
-//                                                } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            break;
-//                                    }
-//                                }
-//                        }
-//                        break;
-//                }
-//            }
-//        } catch (ScriptException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public boolean checkbiome(Generation gen, Biome biome) {

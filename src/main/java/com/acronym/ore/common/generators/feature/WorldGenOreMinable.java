@@ -18,8 +18,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
-    public WorldGenOreMinable() {
-    }
+    public WorldGenOreMinable() {}
 
     public WorldGenOreMinable(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
