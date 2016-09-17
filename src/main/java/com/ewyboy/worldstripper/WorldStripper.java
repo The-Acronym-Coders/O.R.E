@@ -12,7 +12,7 @@ import static com.ewyboy.worldstripper.common.util.Reference.ModInfo.*;
 import static com.ewyboy.worldstripper.common.util.Reference.Paths.*;
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = BUILD_VERSION)
-public class WorldStripper {
+public class    WorldStripper {
 
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;

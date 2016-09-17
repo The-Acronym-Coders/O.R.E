@@ -12,7 +12,7 @@ public class Generation {
     private String name = "defaultName";
     private String type = "defaultType";
     private Map<String, Object> params = new HashMap<>();
-    private Class<? extends OreWorldGenerator> worldGenerator = null;
+    private OreWorldGenerator worldGenerator = null;
     private Map<String, Integer> blocks = new HashMap<>();
     private String genTries = "0";
     private String blockCount = "0";
@@ -25,7 +25,7 @@ public class Generation {
     private String dimensionsRestriction = "none";
     private int[] dimensions = new int[0];
 
-    public Generation(String name, Class<? extends OreWorldGenerator> type, Map<String, Object> params, Map<String, Integer> blocks, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, OreWorldGenerator type, Map<String, Object> params, Map<String, Integer> blocks, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = GenerationRegistry.getKeyFromGenerator(type);
         this.params = params;
@@ -74,11 +74,11 @@ public class Generation {
         this.type = type;
     }
 
-    public Class<? extends OreWorldGenerator> getWorldGenerator() {
+    public OreWorldGenerator getWorldGenerator() {
         return worldGenerator;
     }
 
-    public void setWorldGenerator(Class<? extends OreWorldGenerator> worldGenerator) {
+    public void setWorldGenerator(OreWorldGenerator worldGenerator) {
         this.worldGenerator = worldGenerator;
     }
 

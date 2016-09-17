@@ -44,8 +44,8 @@ public class ORE {
     public void preInit(FMLPreInitializationEvent event) {
         downloadWorldStripper();
         PROXY.initEngines();
-        GenerationRegistry.registerWorldGenerator("ore", WorldGenOreMinable.class);
-        GenerationRegistry.registerWorldGenerator("vein", WorldGenOreVein.class);
+        GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
+        GenerationRegistry.registerWorldGenerator("vein", new WorldGenOreVein());
         GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
         RetroGen.registerRetroGenerator(new RetroGenFlatBedrock());
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
