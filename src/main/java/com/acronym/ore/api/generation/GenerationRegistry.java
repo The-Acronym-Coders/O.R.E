@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class GenerationRegistry {
     private static List<Generation> generations = new ArrayList<>();
-    private static BiMap<String, Class<? extends OreWorldGenerator>> worldGeneratorMap = HashBiMap.create();
+    private static BiMap<String, OreWorldGenerator> worldGeneratorMap = HashBiMap.create();
 
     public static void addGeneration(Generation gen) {
         if (generations.contains(gen)) {
@@ -26,16 +26,16 @@ public class GenerationRegistry {
         return generations;
     }
 
-    public static void registerWorldGenerator(String key, Class<? extends OreWorldGenerator> gen) {
+    public static void registerWorldGenerator(String key,OreWorldGenerator gen) {
         getWorldGeneratorMap().put(key, gen);
     }
 
-    public static String getKeyFromGenerator(Class<? extends OreWorldGenerator> gen) {
+    public static String getKeyFromGenerator(OreWorldGenerator gen) {
         return getWorldGeneratorMap().inverse().get(gen);
     }
 
 
-    public static Class<? extends OreWorldGenerator> getGeneratorFromKey(String key) {
+    public static OreWorldGenerator getGeneratorFromKey(String key) {
         return getWorldGeneratorMap().get(key);
     }
 
@@ -48,7 +48,7 @@ public class GenerationRegistry {
         return null;
     }
 
-    public static BiMap<String, Class<? extends OreWorldGenerator>> getWorldGeneratorMap() {
+    public static BiMap<String, OreWorldGenerator> getWorldGeneratorMap() {
         return worldGeneratorMap;
     }
 

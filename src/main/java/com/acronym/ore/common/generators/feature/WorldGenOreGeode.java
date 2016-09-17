@@ -14,18 +14,26 @@ import java.util.Random;
  * Created by Jared on 8/19/2016.
  */
 public class WorldGenOreGeode extends OreWorldGenerator {
-    private final Map<Block, Integer> blocks;
+    private Map<Block, Integer> blocks;
     /**
      * The number of blocks to generate.
      */
-    private final int numberOfBlocks;
-    private final List<BlockMatcher> predicates;
+    private int numberOfBlocks;
+    private List<BlockMatcher> predicates;
 
     public WorldGenOreGeode(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
         this.predicates = predicates;
+    }
+
+    public WorldGenOreGeode() {
+    }
+
+    @Override
+    public OreWorldGenerator create(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+        return new WorldGenOreGeode(blocks, blockCount, predicates, params);
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position) {
@@ -38,6 +46,7 @@ public class WorldGenOreGeode extends OreWorldGenerator {
         generateGeode();
         return false;
     }
+
 
     private void generateGeode() {
         int width = 1;

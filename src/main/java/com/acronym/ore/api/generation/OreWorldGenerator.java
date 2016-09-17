@@ -1,11 +1,13 @@
 package com.acronym.ore.api.generation;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.AbstractMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -18,6 +20,9 @@ public abstract class OreWorldGenerator extends WorldGenerator {
     private int size;
     private Map<String, Object> params;
     public boolean force;
+
+    public OreWorldGenerator() {
+    }
 
     public OreWorldGenerator(Map<Block, Integer> blocks, int size, Map<String, Object> params) {
         this.blocks = blocks;
@@ -32,8 +37,6 @@ public abstract class OreWorldGenerator extends WorldGenerator {
         this.force = force;
     }
 
-
-    public OreWorldGenerator() {}
 
     public Map<Block, Integer> getBlocks() {
         return blocks;
@@ -64,4 +67,6 @@ public abstract class OreWorldGenerator extends WorldGenerator {
                 .min((e0, e1) -> e0.getValue().compareTo(e1.getValue()))
                 .orElseThrow(IllegalArgumentException::new).getKey();
     }
+
+    public abstract OreWorldGenerator create(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params);
 }

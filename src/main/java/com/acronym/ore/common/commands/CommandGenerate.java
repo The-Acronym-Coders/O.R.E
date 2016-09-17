@@ -3,7 +3,6 @@ package com.acronym.ore.common.commands;
 import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import com.acronym.ore.common.reference.Reference;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -12,11 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import javax.script.ScriptException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -44,11 +40,12 @@ public class CommandGenerate extends CommandBase {
         Generation gen = GenerationRegistry.getGenerationFromName(args[1]);
         if (gen == null) throw new CommandException("No Generation with that name!");
 
-        try {
-            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Map.class, int.class, Map.class).newInstance(gen.getBlocks(), gen.getBlockCount(), gen.getParams()));
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
-            e.printStackTrace();
-        }
+//        try {
+            //TODO
+//            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Map.class, int.class, Map.class).newInstance(gen.getBlocks(), gen.getBlockCount(), gen.getParams()));
+//        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
+//            e.printStackTrace();
+//        }
     }
 
     protected void gen(World worldIn, Random random, BlockPos pos, int blockCount, OreWorldGenerator generator) {

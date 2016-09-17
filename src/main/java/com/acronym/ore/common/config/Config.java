@@ -48,16 +48,17 @@ public class Config {
 
 
     public static void registerJsons() throws Exception {
-        System.out.println(">>> files");
-        System.out.println(Reference.CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json")));
         for (File f : Reference.CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json"))) {
+            System.out.println("adding file: " + f.getName());
             JSONParser<Generation> readerGeneration = new JSONParser<>(f, Generation.class);
+            System.out.println("reading file");
             addGenerator(readerGeneration.getElements("ore"));
         }
     }
 
     public static void addGenerator(Collection<? extends Generation> types) {
         for (Generation type : types) {
+            System.out.println("adding type: " + type);
             System.out.println("adding" + type.getName());
             GenerationRegistry.addGeneration(type.register());
         }
