@@ -13,9 +13,14 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.0.0-1.9.4"
-group= "com.ewyboy.ore"
+version = "1.0.0-1.10.2"
+group= "com.acronym.ore"
 archivesBaseName = "O.R.E"
+
+sourceCompatibility = targetCompatibility = "1.8"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
 
 minecraft {
     version = "1.10.2-12.18.1.2075"

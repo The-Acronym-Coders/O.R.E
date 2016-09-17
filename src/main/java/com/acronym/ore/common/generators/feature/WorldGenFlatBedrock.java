@@ -40,6 +40,18 @@ public class WorldGenFlatBedrock implements IWorldGenerator {
         generateFlatBedrockBottom(world, chunkX, chunkZ, true);
     }
 
+    private void generateFlatBedrockTop(World world, int chunkX, int chunkZ, boolean retroGen) {
+        int flag = retroGen ? 3 : 2;
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 126 - flatBedrockLayers; y < 126; y++) {
+                    BlockPos pos = new BlockPos(chunkX * 16 + x, y, chunkZ * 16 + z);
+                    if (!world.getBlockState(pos).equals(bedrock)) world.setBlockState(pos, bedrock, flag);
+                }
+            }
+        }
+    }
+
     private void generateFlatBedrockBottom(World world, int chunkX, int chunkZ, boolean retroGen) {
         int flag = retroGen ? 3 : 2;
 

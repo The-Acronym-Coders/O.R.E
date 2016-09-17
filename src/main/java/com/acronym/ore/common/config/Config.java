@@ -27,6 +27,7 @@ public class Config {
     }
 
     public static boolean debugMode;
+    public static boolean autoDownloadWorldStripper;
     public static boolean flatBedrock;
     public static int flatBedrockLayers;
     public static int chuckRadius;
@@ -38,6 +39,7 @@ public class Config {
         chuckRadius = config.getInt("Chunk Radius", Reference.ConfigCategories.DEBUG, 3, 1, 12, "Sets the amount of chunks to clear (Chunk * Chunk)");
 
         //Toggables
+        autoDownloadWorldStripper = config.getBoolean("Auto Download World-Stripper Mod", Reference.ConfigCategories.TOGGABLES, true, "Automatically downloads the World-Stripper mod made by EwyBoy and places it in your mods folder on launch.");
         flatBedrock = config.getBoolean("Flat Bedrock", Reference.ConfigCategories.TOGGABLES, true, "Toggle flat bedrock generation");
 
         //Values
