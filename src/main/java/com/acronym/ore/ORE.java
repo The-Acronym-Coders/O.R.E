@@ -75,7 +75,6 @@ public class ORE {
         RetroGen.registerRetroGenerator(new RetroGenFlatBedrock());
         GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
         GameRegistry.registerWorldGenerator(new OREWG(), 0);
-
     }
 
     @Mod.EventHandler
