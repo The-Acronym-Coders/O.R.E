@@ -45,7 +45,15 @@ public class WorldGenOreVein extends OreWorldGenerator {
         int posZ = 10;
         int negZ = 5;
 
+        int x = random.nextInt(16);
+        int y = random.nextInt(64);
+        int z = random.nextInt(16);
+
         for (int i = 0; i < numberOfBlocks; i++) {
+            world.setBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z), getRandomBlock().getDefaultState(), 2);
+        }
+
+        /*for (int i = 0; i < numberOfBlocks; i++) {
             for (int x = pos.getX(); negX < posX; ++x) {
                 for (int y = pos.getY(); negY < posY; ++y) {
                     for (int z = pos.getZ(); negZ < posZ; ++z) {
@@ -54,7 +62,7 @@ public class WorldGenOreVein extends OreWorldGenerator {
                     }
                 }
             }
-        }
+        }*/
         return true;
     }
 }
