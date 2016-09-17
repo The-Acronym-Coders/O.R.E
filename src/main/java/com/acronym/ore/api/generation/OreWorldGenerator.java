@@ -19,7 +19,7 @@ public abstract class OreWorldGenerator extends WorldGenerator {
     public Map<Block, Integer> blocks;
     public int size;
     public Map<String, Object> params;
-    public boolean force;   
+    public boolean force;
 
     public OreWorldGenerator() {
     }

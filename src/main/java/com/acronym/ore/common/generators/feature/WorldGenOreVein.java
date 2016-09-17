@@ -15,13 +15,14 @@ import java.util.Random;
  **/
 public class WorldGenOreVein extends OreWorldGenerator {
 
-    private final Map<Block, Integer> blocks;
-    private final int numberOfBlocks;
-    private final List<BlockMatcher> predicates;
+    private Map<Block, Integer> blocks;
+    private int numberOfBlocks;
+    private List<BlockMatcher> predicates;
 
 
     public WorldGenOreVein() {
     }
+
     public WorldGenOreVein(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;

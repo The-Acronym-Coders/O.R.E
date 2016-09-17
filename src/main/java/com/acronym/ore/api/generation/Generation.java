@@ -12,7 +12,7 @@ public class Generation {
     private String name = "defaultName";
     private String type = "defaultType";
     private Map<String, Object> params = new HashMap<>();
-    private OreWorldGenerator worldGenerator = null;
+    private Class<? extends OreWorldGenerator> worldGenerator = null;
     private Map<String, Integer> blocks = new HashMap<>();
     private String genTries = "0";
     private String blockCount = "0";
@@ -30,7 +30,7 @@ public class Generation {
         this.type = GenerationRegistry.getKeyFromGenerator(type);
         this.params = params;
         this.blocks = blocks;
-        this.worldGenerator = type;
+        this.worldGenerator = type.getClass();
         this.genTries = genTries;
         this.blockCount = blockCount;
         this.replaceable = replaceable;
@@ -48,7 +48,7 @@ public class Generation {
         this.type = type;
         this.params = params;
         this.blocks = blocks;
-        this.worldGenerator = GenerationRegistry.getGeneratorFromKey(type);
+        this.worldGenerator = GenerationRegistry.getGeneratorFromKey(type).getClass();
         this.genTries = genTries;
         this.blockCount = blockCount;
         this.replaceable = replaceable;
@@ -75,11 +75,18 @@ public class Generation {
     }
 
     public OreWorldGenerator getWorldGenerator() {
-        return worldGenerator;
+        try {
+            return worldGenerator.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void setWorldGenerator(OreWorldGenerator worldGenerator) {
-        this.worldGenerator = worldGenerator;
+        this.worldGenerator = worldGenerator.getClass();
     }
 
     public List<Block> getBlocksList() {
