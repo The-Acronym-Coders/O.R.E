@@ -8,13 +8,15 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 import java.util.Collection;
 
+import static com.acronym.ore.common.reference.Reference.Directories.CONFIG_DIR;
+
 /**
  * Created by Jared & Ewy
  */
 public class Config {
 
     public static void load() {
-        Configuration config = new Configuration(new File(Reference.CONFIG_DIR, String.format("%s.cfg", Reference.ModInfo.NAME)));
+        Configuration config = new Configuration(new File(CONFIG_DIR, String.format("%s.cfg", Reference.ModInfo.NAME)));
 
         config.load();
         try {
@@ -48,7 +50,7 @@ public class Config {
 
 
     public static void registerJsons() throws Exception {
-        for (File f : Reference.CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json"))) {
+        for (File f : CONFIG_DIR.listFiles(file -> file.getName().endsWith(".json"))) {
             System.out.println("adding file: " + f.getName());
             JSONParser<Generation> readerGeneration = new JSONParser<>(f, Generation.class);
             System.out.println("reading file");
