@@ -11,10 +11,11 @@ public class Reference {
     public static final class ModInfo {
         public static final String MODID = "ore";
         public static final String NAME = "O.R.E";
-        public static final String VERSION_MAJOR = "1";
-        public static final String VERSION_MINOR = "0";
-        public static final String VERSION_PATCH = "0";
-        public static final String MINECRAFT_VERSION = "1.10.2";
+        public static final String UNACRONYMICED_NAME = "ORE";
+        static final String VERSION_MAJOR = "1";
+        static final String VERSION_MINOR = "0";
+        static final String VERSION_PATCH = "0";
+        static final String MINECRAFT_VERSION = "1.10.2";
         public static final String BUILD_VERSION = VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_PATCH + "-" + MINECRAFT_VERSION;
     }
 
@@ -24,7 +25,7 @@ public class Reference {
     }
 
     public static final class ConfigCategories {
-        public static final String TOGGABLES = "Toggables";
+        public static final String FLATBEDROCK = "FLAT BEDROCK";
         public static final String VALUES = "Values";
         public static final String DEBUG = "Debug";
     }

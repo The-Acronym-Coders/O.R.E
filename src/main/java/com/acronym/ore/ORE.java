@@ -43,6 +43,7 @@ public class ORE {
     public void preInit(FMLPreInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("Pre-Initialization started");
+                Scripts.loadScripts(event);
                 Config.loadConfig();
                 PROXY.initEngines();
                 GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
@@ -53,7 +54,6 @@ public class ORE {
                 MinecraftForge.ORE_GEN_BUS.register(new VanillaOreDisabler());
                 PacketHandler.registerMessages(MODID);
                 PROXY.registerKeybindings();
-                Scripts.loadScripts(event);
             Logger.info("Pre-Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
         Logger.info("Pre-Initialization process done");
     }
