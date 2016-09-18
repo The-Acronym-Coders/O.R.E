@@ -19,9 +19,7 @@ public class WorldGenOreVein extends OreWorldGenerator {
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
-
-    public WorldGenOreVein() {
-    }
+    public WorldGenOreVein() {}
 
     public WorldGenOreVein(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);

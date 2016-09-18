@@ -77,9 +77,7 @@ public class Generation {
     public OreWorldGenerator getWorldGenerator() {
         try {
             return worldGenerator.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;
@@ -114,11 +112,11 @@ public class Generation {
     }
 
     public void setReplaceable(Block[] replaceable) {
-        String[] repl = new String[replaceable.length];
+        String[] replace = new String[replaceable.length];
         for (int i = 0; i < replaceable.length; i++) {
-            repl[i] = replaceable[i].getRegistryName().toString();
+            replace[i] = replaceable[i].getRegistryName().toString();
         }
-        this.replaceable = repl;
+        this.replaceable = replace;
     }
 
 

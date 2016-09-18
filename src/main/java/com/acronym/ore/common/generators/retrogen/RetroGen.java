@@ -27,8 +27,7 @@ public class RetroGen {
     private RetroGenSaveData getRetroGenSaveData(World world) {
         RetroGenSaveData data = (RetroGenSaveData) world.getPerWorldStorage().getOrLoadData(RetroGenSaveData.class, retroGenSaveDataName);
 
-        if (data == null)
-        {
+        if (data == null) {
             data = new RetroGenSaveData(retroGenSaveDataName);
             world.getPerWorldStorage().setData(retroGenSaveDataName, data);
         }
@@ -40,14 +39,14 @@ public class RetroGen {
     public void onChunkLoad(ChunkEvent.Load event) {
         RetroGenSaveData data = getRetroGenSaveData(event.getWorld());
         ChunkHelper coord = new ChunkHelper(event.getChunk());
+
         World world = event.getWorld();
         Chunk chunk = event.getChunk();
 
-        for (IRetroGen gen : generators)
-            if (gen.canGenerateIn(world, chunk) && data.isGenerationNeeded(coord, gen.getUniqueGenerationID())) {
-                genQueue.add(new RetroGenEntry(world, coord, gen));
-                data.markChunkRetroGenerated(coord, gen.getUniqueGenerationID());
-            }
+        generators.stream().filter(gen -> gen.canGenerateIn(world, chunk) && data.isGenerationNeeded(coord, gen.getUniqueGenerationID())).forEachOrdered(gen -> {
+            genQueue.add(new RetroGenEntry(world, coord, gen));
+            data.markChunkRetroGenerated(coord, gen.getUniqueGenerationID());
+        });
     }
 
     @SubscribeEvent
@@ -59,16 +58,12 @@ public class RetroGen {
         ArrayList<RetroGenEntry> removeQueue = Lists.newArrayList();
         ArrayList<RetroGenEntry> iterationQueue = (ArrayList<RetroGenEntry>) genQueue.clone();
 
-        for (RetroGenEntry entry : iterationQueue)
-        {
+        for (RetroGenEntry entry : iterationQueue) {
             entry.gen.generate(entry.world.rand, entry.world, entry.coord.chunkX, entry.coord.chunkZ);
             removeQueue.add(entry);
             count++;
-
-            if (count >= 32)
-                break;
+            if (count >= 32) break;
         }
-
         genQueue.removeAll(removeQueue);
     }
 

@@ -26,6 +26,6 @@ public class RetroGenFlatBedrock implements IRetroGen {
 
     @Override
     public void generate(Random rand, World world, int chunkX, int chunkZ) {
-        WorldGenFlatBedrock.instance.retroGenerateFlatBedrock(world, chunkX, chunkZ);
+        WorldGenFlatBedrock.instance.retroGenerate(world, chunkX, chunkZ);
     }
 }

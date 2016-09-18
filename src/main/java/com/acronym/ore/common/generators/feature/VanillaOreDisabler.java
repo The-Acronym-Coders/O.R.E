@@ -40,7 +40,7 @@ public class VanillaOreDisabler {
     }
 
 
-    //TODO Add if statements here depending on boolean from config is true or false to disable specific world-gen
+    //TODO Add if statements here depending on boolean from directories is true or false to disable specific world-gen
     @SubscribeEvent
     public void onGenerateMinable(GenerateMinable event) {
         switch (event.getType()) {
@@ -88,5 +88,4 @@ public class VanillaOreDisabler {
                 break;
         }
     }
-
 }

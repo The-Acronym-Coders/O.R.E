@@ -1,5 +1,6 @@
-package com.acronym.ore.common.config;
+package com.acronym.ore.common.directories;
 
+import com.acronym.ore.common.helpers.Logger;
 import com.google.gson.*;
 
 import java.io.File;
@@ -28,21 +29,21 @@ public class JSONParser<T> {
     }
 
     public List<T> getElements(String key) {
-        List<T> returnList = new ArrayList<T>();
+        List<T> returnList = new ArrayList<>();
         if (root.get(key) != null) {
-            System.out.println("root not null");
+            Logger.info("root not null");
             JsonArray elements = root.get(key).getAsJsonArray();
             for (JsonElement elem : elements) {
-                System.out.println("elem:" + elem);
-                System.out.println(type);
-                System.out.println(gson.fromJson(elem, type));
+                Logger.info("elem:" + elem);
+                Logger.info(type);
+                Logger.info(gson.fromJson(elem, type));
                 if (type != null && gson.fromJson(elem, type) != null) {
-                    System.out.println("type not null");
+                    Logger.info("type not null");
                     returnList.add(gson.fromJson(elem, type));
                 }
             }
         }
-        System.out.println("done");
+        Logger.info("done");
         return returnList;
     }
 
