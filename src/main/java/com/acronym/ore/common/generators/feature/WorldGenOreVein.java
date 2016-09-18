@@ -42,31 +42,85 @@ public class WorldGenOreVein extends OreWorldGenerator {
     }
 
     private boolean generateVein(World world, Random random, BlockPos pos) {
-        int posX = 10;
-        int negX = 5;
-        int posY = 10;
-        int negY = 5;
-        int posZ = 10;
-        int negZ = 5;
 
-        int x = random.nextInt(16);
-        int y = random.nextInt(64);
-        int z = random.nextInt(16);
+        boolean sparse = false;
 
-        for (int i = 0; i < numberOfBlocks; i++) {
-            world.setBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z), getRandomBlock().getDefaultState(), 2);
+        for (Map.Entry<String, Object> ent : getParams().entrySet()) {
+            switch (ent.getKey().toLowerCase()) {
+                case "sparse":
+                    sparse = Boolean.parseBoolean("" + ent.getValue());
+                    break;
+                default:
+                    System.out.println(String.format("Unknown Param: %s, with Value: %s", ent.getKey(), ent.getValue()));
+                    break;
+            }
         }
+        int branchSize = 1 + (numberOfBlocks / 30);
+        int subBranchSize = 1 + (branchSize / 5);
+        boolean r = false;
+        for (int blocksVein = 0; blocksVein <= numberOfBlocks; ) {
+            BlockPos curPos = pos;
+            int directionChange = world.rand.nextInt(6);
 
-        /*for (int i = 0; i < numberOfBlocks; i++) {
-            for (int x = pos.getX(); negX < posX; ++x) {
-                for (int y = pos.getY(); negY < posY; ++y) {
-                    for (int z = pos.getZ(); negZ < posZ; ++z) {
-                        BlockPos spawnPos = new BlockPos(x,y,z);
-                        world.setBlockState(spawnPos, getRandomBlock().getDefaultState(), 2);
+            int directionX1 = -world.rand.nextInt(2);
+            int directionY1 = -world.rand.nextInt(2);
+            int directionZ1 = -world.rand.nextInt(2);
+            directionX1 += ~directionX1 >>> 31;
+            directionY1 += ~directionY1 >>> 31;
+            directionZ1 += ~directionZ1 >>> 31;
+
+            for (int blocksBranch = 0; blocksBranch <= branchSize; ) {
+                if (directionChange != 1) {
+                    curPos =curPos.add(world.rand.nextInt(2) * directionX1, 0, 0);
+                }
+                if (directionChange != 2) {
+                    curPos = curPos.add(0, world.rand.nextInt(2) * directionY1, 0);
+                }
+                if (directionChange != 3) {
+                    curPos =curPos.add(0, 0, world.rand.nextInt(2) * directionZ1);
+                }
+
+                if (world.rand.nextInt(3) == 0) {
+                    BlockPos nPos = curPos;
+
+                    int directionChange2 = world.rand.nextInt(6);
+
+                    int directionX2 = -world.rand.nextInt(2);
+                    int directionY2 = -world.rand.nextInt(2);
+                    int directionZ2 = -world.rand.nextInt(2);
+                    directionX2 += ~directionX2 >>> 31;
+                    directionY2 += ~directionY2 >>> 31;
+                    directionZ2 += ~directionZ2 >>> 31;
+
+                    for (int blocksSubBranch = 0; blocksSubBranch <= subBranchSize; ) {
+                        if (directionChange2 != 0) {
+                            nPos = nPos.add(world.rand.nextInt(2) * directionX2, 0, 0);
+                        }
+                        if (directionChange2 != 1) {
+                            nPos =nPos.add(0, world.rand.nextInt(2) * directionY2, 0);
+                        }
+                        if (directionChange2 != 2) {
+                            nPos =nPos.add(0, 0, world.rand.nextInt(2) * directionZ2);
+                        }
+
+                        r |= world.setBlockState(nPos, getRandomBlock().getDefaultState(), 2);
+                        if (sparse) {
+                            blocksVein++;
+                            blocksBranch++;
+                        }
+                        blocksSubBranch++;
                     }
                 }
+
+                r |= world.setBlockState(curPos, getRandomBlock().getDefaultState(), 2);
+
+                blocksBranch++;
             }
-        }*/
-        return true;
+            pos = pos.add((world.rand.nextInt(3) - 1), (world.rand.nextInt(3) - 1), (world.rand.nextInt(3) - 1));
+            blocksVein++;
+        }
+
+        return r;
     }
 }
+

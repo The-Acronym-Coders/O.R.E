@@ -9,10 +9,11 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import static com.ewyboy.worldstripper.common.util.Reference.ModInfo.*;
-import static com.ewyboy.worldstripper.common.util.Reference.Paths.*;
+import static com.ewyboy.worldstripper.common.util.Reference.Paths.CLIENT_PROXY;
+import static com.ewyboy.worldstripper.common.util.Reference.Paths.COMMON_PROXY;
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = BUILD_VERSION)
-public class    WorldStripper {
+public class WorldStripper {
 
     @SidedProxy(modId = MOD_ID, clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;

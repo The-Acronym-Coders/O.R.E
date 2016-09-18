@@ -5,10 +5,7 @@ import com.acronym.ore.common.commands.CommandORE;
 import com.acronym.ore.common.directories.Config;
 import com.acronym.ore.common.directories.Scripts;
 import com.acronym.ore.common.generators.OREWG;
-import com.acronym.ore.common.generators.feature.VanillaOreDisabler;
-import com.acronym.ore.common.generators.feature.WorldGenFlatBedrock;
-import com.acronym.ore.common.generators.feature.WorldGenOreMinable;
-import com.acronym.ore.common.generators.feature.WorldGenOreVein;
+import com.acronym.ore.common.generators.feature.*;
 import com.acronym.ore.common.generators.feature.retro.RetroGenFlatBedrock;
 import com.acronym.ore.common.generators.retrogen.RetroGen;
 import com.acronym.ore.common.helpers.Logger;
@@ -43,11 +40,15 @@ public class ORE {
     public void preInit(FMLPreInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
         Logger.info("Pre-Initialization started");
-        Scripts.loadScripts(event);
-        Config.loadConfig();
+
         PROXY.initEngines();
         GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
         GenerationRegistry.registerWorldGenerator("vein", new WorldGenOreVein());
+        GenerationRegistry.registerWorldGenerator("geode", new WorldGenOreGeode());
+        GenerationRegistry.registerWorldGenerator("cluster", new WorldGenOreCluster());
+        Scripts.loadScripts(event);
+        Config.loadConfig();
+
         PacketHandler.registerMessages(MODID);
         PROXY.registerKeybindings();
         Logger.info("Pre-Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
