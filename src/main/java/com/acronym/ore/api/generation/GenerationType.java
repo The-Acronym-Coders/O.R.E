@@ -4,9 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-/**
- * Created by Jared on 8/4/2016.
- */
 public class GenerationType {
 
     private String key;

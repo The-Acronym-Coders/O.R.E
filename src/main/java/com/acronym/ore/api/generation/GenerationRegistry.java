@@ -6,10 +6,6 @@ import com.google.common.collect.HashBiMap;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by Jared on 8/4/2016.
- */
 public class GenerationRegistry {
     private static List<Generation> generations = new ArrayList<>();
     private static BiMap<String, OreWorldGenerator> worldGeneratorMap = HashBiMap.create();

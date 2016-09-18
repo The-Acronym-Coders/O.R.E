@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by Jared on 8/19/2016.
- */
 public class WorldGenOreGeode extends OreWorldGenerator {
     private Map<Block, Integer> blocks;
     /**

@@ -9,9 +9,6 @@ import java.util.Random;
 
 import static com.acronym.ore.common.reference.Reference.ModInfo.MODID;
 
-/**
- * Created by EwyBoy
- **/
 public class RetroGenFlatBedrock implements IRetroGen {
 
     @Override

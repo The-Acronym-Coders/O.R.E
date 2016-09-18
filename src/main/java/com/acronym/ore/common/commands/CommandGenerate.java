@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Jared on 8/20/2016.
- */
 public class CommandGenerate extends CommandBase {
 
     @Override

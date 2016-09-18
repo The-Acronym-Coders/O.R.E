@@ -18,9 +18,6 @@ import java.util.Random;
 
 import static com.acronym.ore.common.reference.Reference.Directories.ENGINE_JAVASCRIPT;
 
-/**
- * Created by Jared on 7/24/2016.
- */
 public class OREWG implements IWorldGenerator {
 
     @Override

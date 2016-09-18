@@ -10,9 +10,6 @@ import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.Ev
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.GenerateMinable;
 import static net.minecraftforge.fml.common.eventhandler.Event.Result.DENY;
 
-/**
- * Created by EwyBoy
- **/
 public class VanillaOreDisabler {
 
     private static Set<EventType> vanillaOres = new THashSet<>();

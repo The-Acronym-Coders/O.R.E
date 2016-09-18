@@ -3,15 +3,12 @@ package com.acronym.ore.common.reference;
 import javax.script.ScriptEngine;
 import java.io.File;
 
-/**
- * Created by Jared & Ewy
- */
 public class Reference {
 
     public static final class ModInfo {
         public static final String MODID = "ore";
         public static final String NAME = "O.R.E";
-        public static final String UNACRONYMICED_NAME = "ORE";
+        public static final String UNACRONYMIZED_NAME = "ORE";
         static final String VERSION_MAJOR = "1";
         static final String VERSION_MINOR = "0";
         static final String VERSION_PATCH = "0";

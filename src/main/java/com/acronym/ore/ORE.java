@@ -42,20 +42,17 @@ public class ORE {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
-            Logger.info("Pre-Initialization started");
-                Scripts.loadScripts(event);
-                Config.loadConfig();
-                PROXY.initEngines();
-                GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
-                GenerationRegistry.registerWorldGenerator("vein", new WorldGenOreVein());
-                GameRegistry.registerWorldGenerator(new WorldGenFlatBedrock(), 0);
-                RetroGen.registerRetroGenerator(new RetroGenFlatBedrock());
-                GameRegistry.registerWorldGenerator(new OREWG(), 0);
-                MinecraftForge.ORE_GEN_BUS.register(new VanillaOreDisabler());
-                PacketHandler.registerMessages(MODID);
-                PROXY.registerKeybindings();
-            Logger.info("Pre-Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
+        Logger.info("Pre-Initialization started");
+        Scripts.loadScripts(event);
+        Config.loadConfig();
+        PROXY.initEngines();
+        GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
+        GenerationRegistry.registerWorldGenerator("vein", new WorldGenOreVein());
+        PacketHandler.registerMessages(MODID);
+        PROXY.registerKeybindings();
+        Logger.info("Pre-Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
         Logger.info("Pre-Initialization process done");
+        watch.stop();
     }
 
     @Mod.EventHandler

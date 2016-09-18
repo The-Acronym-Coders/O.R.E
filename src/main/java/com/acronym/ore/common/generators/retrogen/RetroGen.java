@@ -10,9 +10,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 
-/**
- * Created by EwyBoy
- **/
 public class RetroGen {
 
     private static ArrayList<IRetroGen> generators = Lists.newArrayList();

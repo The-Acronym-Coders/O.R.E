@@ -10,15 +10,12 @@ import java.util.Collection;
 
 import static com.acronym.ore.common.reference.Reference.Directories.CONFIG_DIR;
 import static com.acronym.ore.common.reference.Reference.Directories.SCRIPT_DIR;
-import static com.acronym.ore.common.reference.Reference.ModInfo.UNACRONYMICED_NAME;
+import static com.acronym.ore.common.reference.Reference.ModInfo.UNACRONYMIZED_NAME;
 
-/**
- * Created by EwyBoy & Jared
- **/
 public class Scripts {
 
     public static void loadScripts(FMLPreInitializationEvent event) {
-        CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + UNACRONYMICED_NAME + File.separator);
+        CONFIG_DIR = new File(event.getSuggestedConfigurationFile().getParent(), File.separator + UNACRONYMIZED_NAME + File.separator);
         SCRIPT_DIR = new File(CONFIG_DIR, File.separator + "Generators" + File.separator);
 
         if (!CONFIG_DIR.exists()) CONFIG_DIR.mkdir();
@@ -33,9 +30,7 @@ public class Scripts {
 
     public static void registerJsons() throws Exception {
         for (File script : SCRIPT_DIR.listFiles(file -> file.getName().endsWith(".json"))) {
-            Logger.info("adding file: " + script.getName());
-                JSONParser<Generation> readerGeneration = new JSONParser<>(script, Generation.class);
-            Logger.info("reading file");
+            JSONParser<Generation> readerGeneration = new JSONParser<>(script, Generation.class);
             addGenerator(readerGeneration.getElements("ore"));
         }
     }

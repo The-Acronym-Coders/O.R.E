@@ -7,9 +7,6 @@ import net.minecraft.world.WorldSavedData;
 
 import java.util.Map;
 
-/**
- * Created by EwyBoy
- **/
 public class RetroGenSaveData extends WorldSavedData {
 
     private Map<ChunkHelper, NBTTagCompound> chunks = Maps.newHashMap();

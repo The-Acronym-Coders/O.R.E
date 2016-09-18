@@ -6,9 +6,6 @@ import javax.script.ScriptEngineManager;
 
 import static com.acronym.ore.common.reference.Reference.Directories.ENGINE_JAVASCRIPT;
 
-/**
- * Created by Jared on 8/21/2016.
- */
 public class CommonProxy {
 
     public void registerKeybindings() {}

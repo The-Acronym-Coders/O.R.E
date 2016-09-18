@@ -6,15 +6,12 @@ import java.io.File;
 
 import static com.acronym.ore.common.reference.Reference.*;
 
-/**
- * Created by EwyBoy & Jared
- */
 public class Config {
 
     public static void loadConfig() {
-        Configuration config = new Configuration(new File(Directories.CONFIG_DIR, String.format("%s.cfg", ModInfo.UNACRONYMICED_NAME)));
+        Configuration config = new Configuration(new File(Directories.CONFIG_DIR, String.format("%s.cfg", ModInfo.UNACRONYMIZED_NAME)));
         config.load();
-            registerConfigurations(config);
+        registerConfigurations(config);
         config.save();
     }
 

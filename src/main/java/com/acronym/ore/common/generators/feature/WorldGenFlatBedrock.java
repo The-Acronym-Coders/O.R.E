@@ -14,9 +14,6 @@ import java.util.Random;
 
 import static com.acronym.ore.common.directories.Config.flatBedrockLayers;
 
-/**
- * Created by EwyBoy
- **/
 public class WorldGenFlatBedrock implements IWorldGenerator {
 
     public static WorldGenFlatBedrock instance = new WorldGenFlatBedrock();

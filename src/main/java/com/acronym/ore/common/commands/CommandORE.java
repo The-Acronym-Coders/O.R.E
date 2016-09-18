@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Jared on 8/20/2016.
- */
 public class CommandORE extends CommandBase {
 
     private static List<CommandBase> modCommands = new ArrayList<>();

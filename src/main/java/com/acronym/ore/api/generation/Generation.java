@@ -5,9 +5,6 @@ import net.minecraft.block.Block;
 
 import java.util.*;
 
-/**
- * Created by Jared on 8/4/2016.
- */
 public class Generation {
     private String name = "defaultName";
     private String type = "defaultType";

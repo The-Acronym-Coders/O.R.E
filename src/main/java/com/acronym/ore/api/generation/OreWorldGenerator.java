@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by Jared on 8/4/2016.
- */
 public abstract class OreWorldGenerator extends WorldGenerator {
 
     public Map<Block, Integer> blocks;

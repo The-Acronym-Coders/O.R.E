@@ -7,9 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/**
- * Created by Jared on 8/5/2016.
- */
 public class BlocksMatcher implements Predicate<IBlockState> {
     private final List<Block> blocks;
 

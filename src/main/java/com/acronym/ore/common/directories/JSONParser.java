@@ -31,19 +31,15 @@ public class JSONParser<T> {
     public List<T> getElements(String key) {
         List<T> returnList = new ArrayList<>();
         if (root.get(key) != null) {
-            Logger.info("root not null");
             JsonArray elements = root.get(key).getAsJsonArray();
             for (JsonElement elem : elements) {
-                Logger.info("elem:" + elem);
                 Logger.info(type);
                 Logger.info(gson.fromJson(elem, type));
                 if (type != null && gson.fromJson(elem, type) != null) {
-                    Logger.info("type not null");
                     returnList.add(gson.fromJson(elem, type));
                 }
             }
         }
-        Logger.info("done");
         return returnList;
     }
 

@@ -5,9 +5,6 @@ import net.minecraft.world.chunk.Chunk;
 
 import java.util.Random;
 
-/**
- * Created by EwyBoy
- **/
 public interface IRetroGen {
 
     public String getUniqueGenerationID();

@@ -3,9 +3,6 @@ package com.acronym.ore.common.helpers;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 
-/**
- * Created by EwyBoy
- **/
 public class ChunkHelper {
 
     public int chunkX;

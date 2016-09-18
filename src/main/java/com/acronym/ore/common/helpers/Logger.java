@@ -5,9 +5,6 @@ import org.apache.logging.log4j.Level;
 
 import static com.acronym.ore.common.reference.Reference.ModInfo.NAME;
 
-/**
- * Created by EwyBoy
- **/
 public class Logger {
 
     public Logger() {}

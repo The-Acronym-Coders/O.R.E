@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by EwyBoy
- **/
 public class WorldGenOreVein extends OreWorldGenerator {
 
     private Map<Block, Integer> blocks;
