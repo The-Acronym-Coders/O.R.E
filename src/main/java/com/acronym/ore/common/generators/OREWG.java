@@ -11,12 +11,9 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static com.acronym.ore.common.reference.Reference.Directories.ENGINE_JAVASCRIPT;
 
 public class OREWG implements IWorldGenerator {
 
@@ -35,12 +32,8 @@ public class OREWG implements IWorldGenerator {
             }).filter(gen -> {
                 int chance = random.nextInt(99);
                 if (chance != 0)
-                    try {
-                        if (chance + 1 < (int) ENGINE_JAVASCRIPT.eval(gen.getChunkChance())) {
-                            return true;
-                        }
-                    } catch (ScriptException e) {
-                        e.printStackTrace();
+                    if (chance + 1 < gen.getChunkChance()) {
+                        return true;
                     }
                 return false;
             }).forEach(gen -> {
@@ -58,13 +51,9 @@ public class OREWG implements IWorldGenerator {
                         break;
                 }
                 if (canGen) {
-                    try {
-                        List<BlockMatcher> matcher = new ArrayList<>();
-                        gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
-                        gen(world, random, pos, new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getGenTries()))).intValue(), gen.getWorldGenerator().create(gen.getBlocks(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getBlockCount()))).intValue(), matcher, gen.getParams()), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMinHeight()))).intValue(), new Double(String.valueOf(ENGINE_JAVASCRIPT.eval(gen.getMaxHeight()))).intValue());
-                    } catch (ScriptException e) {
-                        e.printStackTrace();
-                    }
+                    List<BlockMatcher> matcher = new ArrayList<>();
+                    gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
+                    gen(world, random, pos, gen.getGenTries(), gen.getWorldGenerator().create(gen.getBlocks(), gen.getBlockCount(), matcher, gen.getParams()), gen.getMinHeight(), gen.getMaxHeight());
                 }
             });
         } catch (Exception e) {

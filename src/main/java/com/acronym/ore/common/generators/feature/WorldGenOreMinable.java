@@ -18,7 +18,8 @@ public class WorldGenOreMinable extends OreWorldGenerator {
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
-    public WorldGenOreMinable() {}
+    public WorldGenOreMinable() {
+    }
 
     public WorldGenOreMinable(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
@@ -76,7 +77,8 @@ public class WorldGenOreMinable extends OreWorldGenerator {
 
                                     if (force) {
                                         gen = true;
-                                        System.out.println(gen + ":" + force);
+                                    } else if (predicates == null) {
+                                        gen = true;
                                     } else {
                                         for (BlockMatcher match : predicates) {
                                             if (state.getBlock().isReplaceableOreGen(state, world, blockpos, match)) {

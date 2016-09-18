@@ -38,12 +38,7 @@ public class CommandGenerate extends CommandBase {
         if (gen == null) throw new CommandException("No Generation with that name!");
 
         //TODO whatever this shit is @Jared
-        /*try {
-
-            gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), (int) Reference.ENGINE_JAVASCRIPT.eval(gen.getBlockCount()), gen.getWorldGenerator().getConstructor(Map.class, int.class, Map.class).newInstance(gen.getBlocks(), gen.getBlockCount(), gen.getParams()));
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ScriptException e) {
-            e.printStackTrace();
-        }*/
+        gen(server.getEntityWorld(), server.getEntityWorld().rand, new BlockPos(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])), gen.getGenTries(), gen.getWorldGenerator().create(gen.getBlocks(), gen.getBlockCount(), null, gen.getParams()));
     }
 
     protected void gen(World worldIn, Random random, BlockPos pos, int blockCount, OreWorldGenerator generator) {

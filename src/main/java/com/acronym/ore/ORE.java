@@ -27,7 +27,7 @@ import static com.acronym.ore.common.reference.Reference.ModInfo.*;
 import static com.acronym.ore.common.reference.Reference.Paths.CLIENT_PROXY;
 import static com.acronym.ore.common.reference.Reference.Paths.COMMON_PROXY;
 
-@Mod(modid = MODID, name = NAME, version = BUILD_VERSION)
+@Mod(modid = MODID, name = NAME, version = BUILD_VERSION, dependencies = "required-after:base;")
 public class ORE {
 
     @Mod.Instance(Reference.ModInfo.MODID)
@@ -41,7 +41,6 @@ public class ORE {
         Stopwatch watch = Stopwatch.createStarted();
         Logger.info("Pre-Initialization started");
 
-        PROXY.initEngines();
         GenerationRegistry.registerWorldGenerator("ore", new WorldGenOreMinable());
         GenerationRegistry.registerWorldGenerator("vein", new WorldGenOreVein());
         GenerationRegistry.registerWorldGenerator("geode", new WorldGenOreGeode());

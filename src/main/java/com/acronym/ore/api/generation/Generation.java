@@ -11,18 +11,18 @@ public class Generation {
     private Map<String, Object> params = new HashMap<>();
     private Class<? extends OreWorldGenerator> worldGenerator = null;
     private Map<String, Integer> blocks = new HashMap<>();
-    private String genTries = "0";
-    private String blockCount = "0";
-    private String minHeight = "0";
-    private String maxHeight = "0";
+    private int genTries = 0;
+    private int blockCount = 0;
+    private int minHeight = 0;
+    private int maxHeight = 0;
     private String[] replaceable = new String[0];
-    private String chunkChance = "0";
+    private int chunkChance = 0;
     private String biomeRestriction = "none";
     private String[] biomes = new String[0];
     private String dimensionsRestriction = "none";
     private int[] dimensions = new int[0];
 
-    public Generation(String name, OreWorldGenerator type, Map<String, Object> params, Map<String, Integer> blocks, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, OreWorldGenerator type, Map<String, Object> params, Map<String, Integer> blocks, int genTries, int blockCount, String[] replaceable, int minHeight, int maxHeight, String dimensionsRestriction, int[] dimensions, int chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = GenerationRegistry.getKeyFromGenerator(type);
         this.params = params;
@@ -40,7 +40,7 @@ public class Generation {
         this.biomes = biomes;
     }
 
-    public Generation(String name, String type, Map<String, Object> params, Map<String, Integer> blocks, String genTries, String blockCount, String[] replaceable, String minHeight, String maxHeight, String dimensionsRestriction, int[] dimensions, String chunkChance, String biomeRestriction, String[] biomes) {
+    public Generation(String name, String type, Map<String, Object> params, Map<String, Integer> blocks, int genTries, int blockCount, String[] replaceable, int minHeight, int maxHeight, String dimensionsRestriction, int[] dimensions, int chunkChance, String biomeRestriction, String[] biomes) {
         this.name = name;
         this.type = type;
         this.params = params;
@@ -89,9 +89,10 @@ public class Generation {
         this.blocks.keySet().forEach(bl -> blocks.add(Block.getBlockFromName(bl)));
         return blocks;
     }
-    public Map<Block, Integer> getBlocks(){
+
+    public Map<Block, Integer> getBlocks() {
         Map<Block, Integer> blockMap = new HashMap<>();
-        blocks.forEach((key, value)-> blockMap.put(Block.getBlockFromName(key), value));
+        blocks.forEach((key, value) -> blockMap.put(Block.getBlockFromName(key), value));
         return blockMap;
     }
 
@@ -166,48 +167,48 @@ public class Generation {
         this.name = name;
     }
 
-    public String getGenTries() {
+    public int getGenTries() {
         return genTries;
     }
 
-    public void setGenTries(String genTries) {
+    public void setGenTries(int genTries) {
         this.genTries = genTries;
     }
 
-    public String getBlockCount() {
+    public int getBlockCount() {
         return blockCount;
     }
 
-    public void setBlockCount(String blockCount) {
+    public void setBlockCount(int blockCount) {
         this.blockCount = blockCount;
     }
 
-    public String getMinHeight() {
+    public int getMinHeight() {
         return minHeight;
     }
 
-    public void setMinHeight(String minHeight) {
+    public void setMinHeight(int minHeight) {
         this.minHeight = minHeight;
     }
 
-    public String getMaxHeight() {
+    public int getMaxHeight() {
         return maxHeight;
     }
 
-    public void setMaxHeight(String maxHeight) {
+    public void setMaxHeight(int maxHeight) {
         this.maxHeight = maxHeight;
+    }
+
+    public int getChunkChance() {
+        return chunkChance;
+    }
+
+    public void setChunkChance(int chunkChance) {
+        this.chunkChance = chunkChance;
     }
 
     public void setReplaceable(String[] replaceable) {
         this.replaceable = replaceable;
-    }
-
-    public String getChunkChance() {
-        return chunkChance;
-    }
-
-    public void setChunkChance(String chunkChance) {
-        this.chunkChance = chunkChance;
     }
 
 

@@ -1,6 +1,5 @@
 package com.acronym.ore.common.reference;
 
-import javax.script.ScriptEngine;
 import java.io.File;
 
 public class Reference {
@@ -30,6 +29,5 @@ public class Reference {
     public static final class Directories {
         public static File CONFIG_DIR;
         public static File SCRIPT_DIR;
-        public static ScriptEngine ENGINE_JAVASCRIPT;
     }
 }
