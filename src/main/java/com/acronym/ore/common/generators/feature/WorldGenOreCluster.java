@@ -111,7 +111,7 @@ public class WorldGenOreCluster extends OreWorldGenerator {
                         if (zDistSq + xyDistSq >= 1f) {
                             continue;
                         }
-                        r |= world.setBlockState(pos, getRandomBlock().getDefaultState(), 2);
+                        r |= world.setBlockState(new BlockPos(blockX, blockY, blockZ), getRandomBlock().getDefaultState(), 2);
                     }
                 }
             }
