@@ -41,6 +41,8 @@ public class Config {
     public static int flatBedrockLayers;
 
     public static void registerConfigurations(Configuration config) {
+        //DEBUG
+        debugMode = config.getBoolean("Debug Mode", ConfigCategories.DEBUG, false, "WARNING! ONLY FOR DEVELOPERS");
 
         //DISABLE WORLD GENERATION
         disableAllVanillaWorldGen = config.getBoolean("Disable All Vanilla Ore Generation", ConfigCategories.DISABLE_ALL_WORLDGEN, false, "Set to true to disable all vanilla ore generation");
@@ -48,9 +50,6 @@ public class Config {
             String oreName = VanillaOreDisabler.vanillaOres.toArray()[i].toString().toUpperCase();
             disableOres[i] = config.getBoolean("Disable " + oreName, ConfigCategories.DISABLE_WORLDGEN, false, "Set to true to disable ore generation of " + oreName);
         }
-
-        //DEBUG
-        debugMode = config.getBoolean("Debug Mode", ConfigCategories.DEBUG, false, "WARNING! ONLY FOR DEVELOPERS");
 
         //FLAT BEDROCK
         flatBedrock = config.getBoolean("Flat Bedrock", ConfigCategories.FLATBEDROCK, true, "Toggle flat bedrock generation");
