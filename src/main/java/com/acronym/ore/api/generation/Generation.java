@@ -91,6 +91,7 @@ public class Generation {
     }
 
     public Map<Block, Integer> getBlocks() {
+        
         Map<Block, Integer> blockMap = new HashMap<>();
         blocks.forEach((key, value) -> blockMap.put(Block.getBlockFromName(key), value));
         return blockMap;
