@@ -41,16 +41,18 @@ public class WorldGenFlatBedrock implements IWorldGenerator {
     }
 
     public void retroGenerate(World world, int chunkX, int chunkZ) {
-        if (canGenerate(world)) {
-            switch (world.provider.getDimensionType()) {
-                case OVERWORLD:
-                    generateFlatBedrockBottom(world, chunkX, chunkZ, true);
-                    break;
-                case NETHER:
-                    generateFlatBedrockTop(world, chunkX, chunkZ, true);
-                    generateFlatBedrockBottom(world, chunkX, chunkZ, true);
-                    break;
-                default : break;
+        if (Config.flatBedrockRetroGen) {
+            if (canGenerate(world)) {
+                switch (world.provider.getDimensionType()) {
+                    case OVERWORLD:
+                        generateFlatBedrockBottom(world, chunkX, chunkZ, true);
+                        break;
+                    case NETHER:
+                        generateFlatBedrockTop(world, chunkX, chunkZ, true);
+                        generateFlatBedrockBottom(world, chunkX, chunkZ, true);
+                        break;
+                    default : break;
+                }
             }
         }
     }
