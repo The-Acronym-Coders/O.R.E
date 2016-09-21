@@ -1,7 +1,6 @@
 package com.acronym.ore.common.generators.feature;
 
 import gnu.trove.set.hash.THashSet;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Set;
@@ -36,56 +35,54 @@ public class VanillaOreDisabler {
     
     @SubscribeEvent
     public void denyAllVanillaOreGeneration(GenerateMinable event) {
-        if (disableAllVanillaWorldGen) if (vanillaOres.contains(event.getType())) event.setResult(DENY);
-    }
-
-
-    //TODO Add if statements here depending on boolean from directories is true or false to disable specific world-gen
-    @SubscribeEvent
-    public void onGenerateMinable(GenerateMinable event) {
-        switch (event.getType()) {
-            case COAL:
-                if (disableOres[0]) event.setResult(Event.Result.DENY);
-                break;
-            case IRON:
-                if (disableOres[1]) event.setResult(Event.Result.DENY);
-                break;
-            case GOLD:
-                if (disableOres[2]) event.setResult(Event.Result.DENY);
-                break;
-            case DIAMOND:
-                if (disableOres[3]) event.setResult(Event.Result.DENY);
-                break;
-            case REDSTONE:
-                if (disableOres[4]) event.setResult(Event.Result.DENY);
-                break;
-            case LAPIS:
-                if (disableOres[5]) event.setResult(Event.Result.DENY);
-                break;
-            case EMERALD:
-                if (disableOres[6]) event.setResult(Event.Result.DENY);
-                break;
-            case DIRT:
-                if (disableOres[7]) event.setResult(Event.Result.DENY);
-                break;
-            case GRAVEL:
-                if (disableOres[8]) event.setResult(Event.Result.DENY);
-                break;
-            case ANDESITE:
-                if (disableOres[9]) event.setResult(Event.Result.DENY);
-                break;
-            case GRANITE:
-                if (disableOres[10]) event.setResult(Event.Result.DENY);
-                break;
-            case DIORITE:
-                if (disableOres[11]) event.setResult(Event.Result.DENY);
-                break;
-            case QUARTZ:
-                if (disableOres[12]) event.setResult(Event.Result.DENY);
-                break;
-            case SILVERFISH:
-                if (disableOres[13]) event.setResult(Event.Result.DENY);
-                break;
+        if (disableAllVanillaWorldGen) {
+            if (vanillaOres.contains(event.getType())) event.setResult(DENY);
+        } else {
+            switch (event.getType()) {
+                case ANDESITE:
+                    if (disableOres[0]) {event.setResult(DENY);}
+                    break;
+                case COAL:
+                    if (disableOres[1]) {event.setResult(DENY);}
+                    break;
+                case DIAMOND:
+                    if (disableOres[2]) {event.setResult(DENY);}
+                    break;
+                case DIORITE:
+                    if (disableOres[3]) {event.setResult(DENY);}
+                    break;
+                case DIRT:
+                    if (disableOres[4]) {event.setResult(DENY);}
+                    break;
+                case EMERALD:
+                    if (disableOres[5]) {event.setResult(DENY);}
+                    break;
+                case GOLD:
+                    if (disableOres[6]) {event.setResult(DENY);}
+                    break;
+                case GRANITE:
+                    if (disableOres[7]) {event.setResult(DENY);}
+                    break;
+                case GRAVEL:
+                    if (disableOres[8]) {event.setResult(DENY);}
+                    break;
+                case IRON:
+                    if (disableOres[9]) {event.setResult(DENY);}
+                    break;
+                case LAPIS:
+                    if (disableOres[10]) {event.setResult(DENY);}
+                    break;
+                case QUARTZ:
+                    if (disableOres[11]) {event.setResult(DENY);}
+                    break;
+                case REDSTONE:
+                    if (disableOres[12]) {event.setResult(DENY);}
+                    break;
+                case SILVERFISH:
+                    if (disableOres[13]) {event.setResult(DENY);}
+                    break;
+                default:
+            }
         }
     }
 }
