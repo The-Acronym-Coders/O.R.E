@@ -1,7 +1,7 @@
 package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,13 +12,13 @@ import java.util.Random;
 
 public class WorldGenOreVein extends OreWorldGenerator {
 
-    private Map<Block, Integer> blocks;
+    private Map<IBlockState, Integer> blocks;
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
     public WorldGenOreVein() {}
 
-    public WorldGenOreVein(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public WorldGenOreVein(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
@@ -26,7 +26,7 @@ public class WorldGenOreVein extends OreWorldGenerator {
     }
 
     @Override
-    public OreWorldGenerator create(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         return new WorldGenOreVein(blocks, blockCount, predicates, params);
     }
 
@@ -103,7 +103,7 @@ public class WorldGenOreVein extends OreWorldGenerator {
                             nPos =nPos.add(0, 0, world.rand.nextInt(2) * directionZ2);
                         }
 
-                        r |= world.setBlockState(nPos, getRandomBlock().getDefaultState(), 2);
+                        r |= world.setBlockState(nPos, getRandomBlock(), 2);
                         if (sparse) {
                             blocksVein++;
                             blocksBranch++;
@@ -112,7 +112,7 @@ public class WorldGenOreVein extends OreWorldGenerator {
                     }
                 }
 
-                r |= world.setBlockState(curPos, getRandomBlock().getDefaultState(), 2);
+                r |= world.setBlockState(curPos, getRandomBlock(), 2);
 
                 blocksBranch++;
             }

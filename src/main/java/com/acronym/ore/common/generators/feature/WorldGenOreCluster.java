@@ -1,7 +1,7 @@
 package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -13,11 +13,11 @@ import java.util.Random;
 
 public class WorldGenOreCluster extends OreWorldGenerator {
 
-    private Map<Block, Integer> blocks;
+    private Map<IBlockState, Integer> blocks;
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
-    public WorldGenOreCluster(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public WorldGenOreCluster(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
@@ -28,7 +28,7 @@ public class WorldGenOreCluster extends OreWorldGenerator {
     }
 
     @Override
-    public OreWorldGenerator create(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         return new WorldGenOreCluster(blocks, blockCount, predicates, params);
     }
 
@@ -51,7 +51,7 @@ public class WorldGenOreCluster extends OreWorldGenerator {
             boolean r = false;
             // not <=; generating up to clusterSize blocks
             for (int i = 0; i < genClusterSize; i++) {
-                r |= world.setBlockState(pos.add(random.nextInt(2), random.nextInt(2), random.nextInt(2)), getRandomBlock().getDefaultState(), 2);
+                r |= world.setBlockState(pos.add(random.nextInt(2), random.nextInt(2), random.nextInt(2)), getRandomBlock(), 2);
             }
             return r;
         }
@@ -111,7 +111,7 @@ public class WorldGenOreCluster extends OreWorldGenerator {
                         if (zDistSq + xyDistSq >= 1f) {
                             continue;
                         }
-                        r |= world.setBlockState(new BlockPos(blockX, blockY, blockZ), getRandomBlock().getDefaultState(), 2);
+                        r |= world.setBlockState(new BlockPos(blockX, blockY, blockZ), getRandomBlock(), 2);
                     }
                 }
             }

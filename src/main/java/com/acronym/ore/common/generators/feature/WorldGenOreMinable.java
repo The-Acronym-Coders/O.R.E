@@ -1,7 +1,6 @@
 package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
@@ -14,14 +13,14 @@ import java.util.Random;
 
 public class WorldGenOreMinable extends OreWorldGenerator {
 
-    private Map<Block, Integer> blocks;
+    private Map<IBlockState, Integer> blocks;
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
     public WorldGenOreMinable() {
     }
 
-    public WorldGenOreMinable(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public WorldGenOreMinable(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
@@ -29,7 +28,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
     }
 
     @Override
-    public OreWorldGenerator create(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         return new WorldGenOreMinable(blocks, blockCount, predicates, params);
     }
 
@@ -88,10 +87,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                         }
                                     }
                                     if (gen) {
-                                        world.setBlockState(blockpos, getRandomBlock().getDefaultState(), 2);
-                                    }
-                                    if (gen) {
-                                        world.setBlockState(blockpos, getRandomBlock().getDefaultState(), 2);
+                                        world.setBlockState(blockpos, getRandomBlock(), 2);
                                     }
                                 }
                             }
@@ -144,7 +140,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
 
                                     IBlockState state = worldIn.getBlockState(blockpos);
-                                    worldIn.setBlockState(blockpos, getRandomBlock().getDefaultState(), 2);
+                                    worldIn.setBlockState(blockpos, getRandomBlock(), 2);
                                 }
                             }
                         }

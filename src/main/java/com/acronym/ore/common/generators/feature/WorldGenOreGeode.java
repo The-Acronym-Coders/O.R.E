@@ -2,6 +2,7 @@ package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,14 +13,14 @@ import java.util.Map;
 import java.util.Random;
 
 public class WorldGenOreGeode extends OreWorldGenerator {
-    private Map<Block, Integer> blocks;
+    private Map<IBlockState, Integer> blocks;
     /**
      * The number of blocks to generate.
      */
     private int numberOfBlocks;
     private List<BlockMatcher> predicates;
 
-    public WorldGenOreGeode(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public WorldGenOreGeode(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
@@ -30,7 +31,7 @@ public class WorldGenOreGeode extends OreWorldGenerator {
     }
 
     @Override
-    public OreWorldGenerator create(Map<Block, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
         return new WorldGenOreGeode(blocks, blockCount, predicates, params);
     }
 
@@ -138,7 +139,7 @@ public class WorldGenOreGeode extends OreWorldGenerator {
             for (z = 0; z < width; ++z) {
                 for (y = 0; y < height; ++y) {
                     if (spawnBlock[(x * width + z) * height + y]) {
-                        boolean t = worldIn.setBlockState(pos.add(x, y, z), getRandomBlock().getDefaultState(), 2);
+                        boolean t = worldIn.setBlockState(pos.add(x, y, z), getRandomBlock(), 2);
                         r |= t;
                         if (!t) {
                             spawnBlock[(x * width + z) * height + y] = false;
@@ -152,7 +153,7 @@ public class WorldGenOreGeode extends OreWorldGenerator {
             for (z = 0; z < width; ++z) {
                 for (y = 0; y < height; ++y) {
                     if (getRandomBlock() != null && hollowBlock[(x * width + z) * height + y]) {
-                        r |= worldIn.setBlockState(pos.add(x, y, z), getRandomBlock().getDefaultState(), 2);
+                        r |= worldIn.setBlockState(pos.add(x, y, z), getRandomBlock(), 2);
                     } else {
                         boolean flag = !spawnBlock[(x * width + z) * height + y]
                                 && ((x < W && spawnBlock[((x + 1) * width + z) * height + y]) || (x > 0 && spawnBlock[((x - 1) * width + z) * height + y])
