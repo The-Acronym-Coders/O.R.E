@@ -10,7 +10,7 @@ public class Reference {
         public static final String UNACRONYMIZED_NAME = "ORE";
         static final String VERSION_MAJOR = "1";
         static final String VERSION_MINOR = "0";
-        static final String VERSION_PATCH = "2";
+        static final String VERSION_PATCH = "3";
         static final String MINECRAFT_VERSION = "1.10.2";
         public static final String BUILD_VERSION = VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_PATCH + "-" + MINECRAFT_VERSION;
     }
