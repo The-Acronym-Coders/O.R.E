@@ -1,7 +1,7 @@
 package com.acronym.ore.api.generation;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -65,5 +65,5 @@ public abstract class OreWorldGenerator extends WorldGenerator {
                 .orElseThrow(IllegalArgumentException::new).getKey();
     }
 
-    public abstract OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params);
+    public abstract OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockStateMatcher> predicates, Map<String, Object> params);
 }

@@ -4,6 +4,7 @@ import com.acronym.ore.api.generation.Generation;
 import com.acronym.ore.api.generation.GenerationRegistry;
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -51,8 +52,8 @@ public class OREWG implements IWorldGenerator {
                         break;
                 }
                 if (canGen) {
-                    List<BlockMatcher> matcher = new ArrayList<>();
-                    gen.getReplaceable().forEach(bl -> matcher.add(BlockMatcher.forBlock(bl)));
+                    List<BlockStateMatcher> matcher = new ArrayList<>();
+                    gen.getReplaceable().forEach(bl -> matcher.add(BlockStateMatcher.forBlock(bl.getBlock())));
                     gen(world, random, pos, gen.getGenTries(), gen.getWorldGenerator().create(gen.getBlocks(), gen.getBlockCount(), matcher, gen.getParams()), gen.getMinHeight(), gen.getMaxHeight());
                 }
             });

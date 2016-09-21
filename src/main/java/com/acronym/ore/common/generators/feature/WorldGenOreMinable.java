@@ -2,7 +2,7 @@ package com.acronym.ore.common.generators.feature;
 
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -15,12 +15,12 @@ public class WorldGenOreMinable extends OreWorldGenerator {
 
     private Map<IBlockState, Integer> blocks;
     private int numberOfBlocks;
-    private List<BlockMatcher> predicates;
+    private List<BlockStateMatcher> predicates;
 
     public WorldGenOreMinable() {
     }
 
-    public WorldGenOreMinable(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public WorldGenOreMinable(Map<IBlockState, Integer> blocks, int blockCount, List<BlockStateMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
@@ -28,7 +28,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
     }
 
     @Override
-    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockStateMatcher> predicates, Map<String, Object> params) {
         return new WorldGenOreMinable(blocks, blockCount, predicates, params);
     }
 
@@ -79,7 +79,7 @@ public class WorldGenOreMinable extends OreWorldGenerator {
                                     } else if (predicates == null) {
                                         gen = true;
                                     } else {
-                                        for (BlockMatcher match : predicates) {
+                                        for (BlockStateMatcher match : predicates) {
                                             if (state.getBlock().isReplaceableOreGen(state, world, blockpos, match)) {
                                                 gen = true;
                                                 break;

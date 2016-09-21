@@ -2,6 +2,7 @@ package com.acronym.ore.api.generation;
 
 import com.google.common.primitives.Ints;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 
 import java.util.*;
 
@@ -84,16 +85,27 @@ public class Generation {
         this.worldGenerator = worldGenerator.getClass();
     }
 
-    public List<Block> getBlocksList() {
-        List<Block> blocks = new ArrayList<>();
-        this.blocks.keySet().forEach(bl -> blocks.add(Block.getBlockFromName(bl)));
+    public List<IBlockState> getBlocksList() {
+        List<IBlockState> blocks = new ArrayList<>();
+        this.blocks.keySet().forEach(bl -> {
+            if (bl.contains(";")) {
+                blocks.add(Block.getBlockFromName(bl.split(";")[0]).getStateFromMeta(Integer.parseInt(bl.split(";")[1])));
+            } else {
+                blocks.add(Block.getBlockFromName(bl).getDefaultState());
+            }
+        });
         return blocks;
     }
 
-    public Map<Block, Integer> getBlocks() {
-        
-        Map<Block, Integer> blockMap = new HashMap<>();
-        blocks.forEach((key, value) -> blockMap.put(Block.getBlockFromName(key), value));
+    public Map<IBlockState, Integer> getBlocks() {
+        Map<IBlockState, Integer> blockMap = new HashMap<>();
+        blocks.forEach((bl, value) -> {
+            if (bl.contains(";")) {
+                blockMap.put(Block.getBlockFromName(bl.split(";")[0]).getStateFromMeta(Integer.parseInt(bl.split(";")[1])), value);
+            } else {
+                blockMap.put(Block.getBlockFromName(bl).getDefaultState(), value);
+            }
+        });
         return blockMap;
     }
 
@@ -102,10 +114,14 @@ public class Generation {
         this.blocks = blocks;
     }
 
-    public List<Block> getReplaceable() {
-        List<Block> blocks = new ArrayList<Block>();
-        for (String s : replaceable) {
-            blocks.add(Block.getBlockFromName(s));
+    public List<IBlockState> getReplaceable() {
+        List<IBlockState> blocks = new ArrayList<>();
+        for (String bl : this.replaceable) {
+            if (bl.contains(";")) {
+                blocks.add(Block.getBlockFromName(bl.split(";")[0]).getStateFromMeta(Integer.parseInt(bl.split(";")[1])));
+            } else {
+                blocks.add(Block.getBlockFromName(bl).getDefaultState());
+            }
         }
         return blocks;
     }

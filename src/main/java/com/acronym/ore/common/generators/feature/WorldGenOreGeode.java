@@ -3,7 +3,7 @@ package com.acronym.ore.common.generators.feature;
 import com.acronym.ore.api.generation.OreWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -18,9 +18,9 @@ public class WorldGenOreGeode extends OreWorldGenerator {
      * The number of blocks to generate.
      */
     private int numberOfBlocks;
-    private List<BlockMatcher> predicates;
+    private List<BlockStateMatcher> predicates;
 
-    public WorldGenOreGeode(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public WorldGenOreGeode(Map<IBlockState, Integer> blocks, int blockCount, List<BlockStateMatcher> predicates, Map<String, Object> params) {
         super(blocks, blockCount, params);
         this.blocks = blocks;
         this.numberOfBlocks = blockCount;
@@ -31,7 +31,7 @@ public class WorldGenOreGeode extends OreWorldGenerator {
     }
 
     @Override
-    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockMatcher> predicates, Map<String, Object> params) {
+    public OreWorldGenerator create(Map<IBlockState, Integer> blocks, int blockCount, List<BlockStateMatcher> predicates, Map<String, Object> params) {
         return new WorldGenOreGeode(blocks, blockCount, predicates, params);
     }
 
