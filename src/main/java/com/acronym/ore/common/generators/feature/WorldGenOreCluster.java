@@ -44,79 +44,54 @@ public class WorldGenOreCluster extends OreWorldGenerator {
     }
 
     private boolean generateCluster(World world, Random random, BlockPos pos) {
-        int genClusterSize = numberOfBlocks;
+        float f = random.nextFloat() * (float) Math.PI;
+        double d0 = (double) ((float) (pos.getX() + 8) + MathHelper.sin(f) * (float) this.numberOfBlocks / 8.0F);
+        double d1 = (double) ((float) (pos.getX() + 8) - MathHelper.sin(f) * (float) this.numberOfBlocks / 8.0F);
+        double d2 = (double) ((float) (pos.getZ() + 8) + MathHelper.cos(f) * (float) this.numberOfBlocks / 8.0F);
+        double d3 = (double) ((float) (pos.getZ() + 8) - MathHelper.cos(f) * (float) this.numberOfBlocks / 8.0F);
+        double d4 = (double) (pos.getY() + random.nextInt(3) - 2);
+        double d5 = (double) (pos.getY() + random.nextInt(3) - 2);
 
-        int blocks = genClusterSize;
-        if (blocks < 4) { // HACK: at 1 and 2 no ores are ever generated. at 3 only 1/3 veins generate
-            boolean r = false;
-            // not <=; generating up to clusterSize blocks
-            for (int i = 0; i < genClusterSize; i++) {
-                r |= world.setBlockState(pos.add(random.nextInt(2), random.nextInt(2), random.nextInt(2)), getRandomBlock(), 2);
-            }
-            return r;
-        }
-        float f = world.rand.nextFloat() * (float) Math.PI;
-        // despite naming, these are not exactly min/max. more like direction
-        float xMin = pos.getX() + 8 + (MathHelper.sin(f) * blocks) / 8F;
-        float xMax = pos.getX() + 8 - (MathHelper.sin(f) * blocks) / 8F;
-        float zMin = pos.getX() + 8 + (MathHelper.cos(f) * blocks) / 8F;
-        float zMax = pos.getZ() + 8 - (MathHelper.cos(f) * blocks) / 8F;
-        float yMin = (pos.getZ() + world.rand.nextInt(3)) - 2;
-        float yMax = (pos.getZ() + world.rand.nextInt(3)) - 2;
+        for (int i = 0; i < this.numberOfBlocks; ++i) {
+            float f1 = (float) i / (float) this.numberOfBlocks;
+            double d6 = d0 + (d1 - d0) * (double) f1;
+            double d7 = d4 + (d5 - d4) * (double) f1;
+            double d8 = d2 + (d3 - d2) * (double) f1;
+            double d9 = random.nextDouble() * (double) this.numberOfBlocks / 16.0D;
+            double d10 = (double) (MathHelper.sin((float) Math.PI * f1) + 1.0F) * d9 + 1.0D;
+            double d11 = (double) (MathHelper.sin((float) Math.PI * f1) + 1.0F) * d9 + 1.0D;
+            int j = MathHelper.floor_double(d6 - d10 / 2.0D);
+            int k = MathHelper.floor_double(d7 - d11 / 2.0D);
+            int l = MathHelper.floor_double(d8 - d10 / 2.0D);
+            int i1 = MathHelper.floor_double(d6 + d10 / 2.0D);
+            int j1 = MathHelper.floor_double(d7 + d11 / 2.0D);
+            int k1 = MathHelper.floor_double(d8 + d10 / 2.0D);
 
-        // optimization so this subtraction doesn't occur every time in the loop
-        xMax -= xMin;
-        yMax -= yMin;
-        zMax -= zMin;
+            for (int l1 = j; l1 <= i1; ++l1) {
+                double d12 = ((double) l1 + 0.5D - d6) / (d10 / 2.0D);
 
-        boolean r = false;
-        for (int i = 0; i <= blocks; i++) {
+                if (d12 * d12 < 1.0D) {
+                    for (int i2 = k; i2 <= j1; ++i2) {
+                        double d13 = ((double) i2 + 0.5D - d7) / (d11 / 2.0D);
 
-            float xCenter = xMin + (xMax * i) / blocks;
-            float yCenter = yMin + (yMax * i) / blocks;
-            float zCenter = zMin + (zMax * i) / blocks;
+                        if (d12 * d12 + d13 * d13 < 1.0D) {
+                            for (int j2 = l; j2 <= k1; ++j2) {
+                                double d14 = ((double) j2 + 0.5D - d8) / (d10 / 2.0D);
 
-            // preserved as nextDouble to ensure the rand gets ticked the same amount
-            float size = ((float) world.rand.nextDouble() * blocks) / 16f;
+                                if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D) {
+                                    BlockPos blockpos = new BlockPos(l1, i2, j2);
 
-            float hMod = ((MathHelper.sin((i * (float) Math.PI) / blocks) + 1f) * size + 1f) * .5f;
-            float vMod = ((MathHelper.sin((i * (float) Math.PI) / blocks) + 1f) * size + 1f) * .5f;
-
-            int xStart = MathHelper.floor_float(xCenter - hMod);
-            int yStart = MathHelper.floor_float(yCenter - vMod);
-            int zStart = MathHelper.floor_float(zCenter - hMod);
-
-            int xStop = MathHelper.floor_float(xCenter + hMod);
-            int yStop = MathHelper.floor_float(yCenter + vMod);
-            int zStop = MathHelper.floor_float(zCenter + hMod);
-
-            for (int blockX = xStart; blockX <= xStop; blockX++) {
-                float xDistSq = ((blockX + .5f) - xCenter) / hMod;
-                xDistSq *= xDistSq;
-                if (xDistSq >= 1f) {
-                    continue;
-                }
-
-                for (int blockY = yStart; blockY <= yStop; blockY++) {
-                    float yDistSq = ((blockY + .5f) - yCenter) / vMod;
-                    yDistSq *= yDistSq;
-                    float xyDistSq = yDistSq + xDistSq;
-                    if (xyDistSq >= 1f) {
-                        continue;
-                    }
-
-                    for (int blockZ = zStart; blockZ <= zStop; blockZ++) {
-                        float zDistSq = ((blockZ + .5f) - zCenter) / hMod;
-                        zDistSq *= zDistSq;
-                        if (zDistSq + xyDistSq >= 1f) {
-                            continue;
+                                    IBlockState state = world.getBlockState(blockpos);
+//                                    if (predicates.contains(BlockStateMatcher.forBlock(state.getBlock())))
+                                    world.setBlockState(blockpos, getRandomBlock(), 2);
+                                }
+                            }
                         }
-                        r |= world.setBlockState(new BlockPos(blockX, blockY, blockZ), getRandomBlock(), 2);
                     }
                 }
             }
         }
 
-        return r;
+        return true;
     }
 }
