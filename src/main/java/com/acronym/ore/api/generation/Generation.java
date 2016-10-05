@@ -1,5 +1,6 @@
 package com.acronym.ore.api.generation;
 
+import com.acronym.ore.ORE;
 import com.google.common.primitives.Ints;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -101,9 +102,19 @@ public class Generation {
         Map<IBlockState, Integer> blockMap = new HashMap<>();
         blocks.forEach((bl, value) -> {
             if (bl.contains(";")) {
-                blockMap.put(Block.getBlockFromName(bl.split(";")[0]).getStateFromMeta(Integer.parseInt(bl.split(";")[1])), value);
+                Block b = Block.getBlockFromName(bl.split(";")[0]);
+                if (b != null) {
+                    blockMap.put(b.getStateFromMeta(Integer.parseInt(bl.split(";")[1])), value);
+                } else {
+                    ORE.LOGGER.logError("No block found by the name: " + bl);
+                }
             } else {
-                blockMap.put(Block.getBlockFromName(bl).getDefaultState(), value);
+                Block b = Block.getBlockFromName(bl.split(";")[0]);
+                if (b != null) {
+                    blockMap.put(b.getDefaultState(), value);
+                } else {
+                    ORE.LOGGER.logError("No block found by the name: " + bl);
+                }
             }
         });
         return blockMap;
@@ -116,13 +127,23 @@ public class Generation {
 
     public List<IBlockState> getReplaceable() {
         List<IBlockState> blocks = new ArrayList<>();
-        for (String bl : this.replaceable) {
+        Arrays.asList(replaceable).forEach(bl -> {
             if (bl.contains(";")) {
-                blocks.add(Block.getBlockFromName(bl.split(";")[0]).getStateFromMeta(Integer.parseInt(bl.split(";")[1])));
+                Block b = Block.getBlockFromName(bl.split(";")[0]);
+                if (b != null) {
+                    blocks.add(b.getStateFromMeta(Integer.parseInt(bl.split(";")[1])));
+                } else {
+                    ORE.LOGGER.logError("No block(Replaceable)  found by the name: " + bl);
+                }
             } else {
-                blocks.add(Block.getBlockFromName(bl).getDefaultState());
+                Block b = Block.getBlockFromName(bl.split(";")[0]);
+                if (b != null) {
+                    blocks.add(b.getDefaultState());
+                } else {
+                    ORE.LOGGER.logError("No block(Replaceable) found by the name: " + bl);
+                }
             }
-        }
+        });
         return blocks;
     }
 

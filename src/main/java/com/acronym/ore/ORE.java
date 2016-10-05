@@ -1,5 +1,6 @@
 package com.acronym.ore;
 
+import com.acronym.base.util.FileLogger;
 import com.acronym.ore.common.commands.CommandORE;
 import com.acronym.ore.common.directories.Config;
 import com.acronym.ore.common.directories.Scripts;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import static com.acronym.ore.common.reference.Reference.ModInfo.*;
@@ -28,6 +30,7 @@ public class ORE {
 
     @Mod.Instance(Reference.ModInfo.MODID)
     public static ORE INSTANCE;
+    public static FileLogger LOGGER = new FileLogger(new File("logs" + File.pathSeparator + "ore.log"));
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
