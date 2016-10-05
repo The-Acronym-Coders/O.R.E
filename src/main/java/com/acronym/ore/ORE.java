@@ -1,6 +1,5 @@
 package com.acronym.ore;
 
-import com.acronym.base.util.FileLogger;
 import com.acronym.ore.common.commands.CommandORE;
 import com.acronym.ore.common.directories.Config;
 import com.acronym.ore.common.directories.Scripts;
@@ -10,6 +9,7 @@ import com.acronym.ore.common.generators.feature.VanillaOreDisabler;
 import com.acronym.ore.common.generators.feature.WorldGenFlatBedrock;
 import com.acronym.ore.common.generators.feature.retro.RetroGenFlatBedrock;
 import com.acronym.ore.common.generators.retrogen.RetroGen;
+import com.acronym.ore.common.helpers.FileLogger;
 import com.acronym.ore.common.helpers.Logger;
 import com.acronym.ore.common.reference.Reference;
 import com.google.common.base.Stopwatch;
