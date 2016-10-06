@@ -36,7 +36,6 @@ public class ORE {
     public void preInit(FMLPreInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
         Logger.info("Pre-Initialization started");
-
         GeneratorLoader.loadGenerators();
         Scripts.loadScripts(event);
         Config.loadConfig();
