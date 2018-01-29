@@ -9,34 +9,44 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "${minecraft_version}"
-group = "${modGroup}"
-archivesBaseName = "${modBaseName}"
-
+version = modVersion
+group = modGroup
+archivesBaseName = modBaseName
 sourceCompatibility = targetCompatibility = '1.8'
+
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
 minecraft {
-    version = "${minecraft_version}-${forge_version}"
-    mappings = "${mappings_version}"
-    runDir = "run/"
+    version = project.forgeVersion
+    runDir = "run"
+    mappings = project.mcpVersion
     useDepAts = true
 }
 
 repositories{
     maven{
-        name 'BASE/CraftTweaker'
+        name 'CraftTweaker'
         url 'http://maven.blamejared.com'
+    }
+    maven{
+        name 'JEI'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        name = 'Waila'
+        url 'https://tehnut.info/maven'
     }
 }
 
 dependencies {
     deobfCompile "com.teamacronymcoders.base:base:${minecraft_version}-${base_version}-SNAPSHOT.+"
+    deobfCompile "mezz.jei:jei_1.12.2:4.8.5.144"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:CraftTweaker2-API:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:ZenScript:1.12-${crafttweaker_version}"
+    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
 }
 
 processResources {
